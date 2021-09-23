@@ -8,7 +8,11 @@ import net.minecraft.util.Identifier;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import geoactivity.common.registry.GAConfiguredFeatures;
 import geoactivity.common.registry.GAObjects;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
@@ -21,15 +25,19 @@ public class GeoActivity implements ModInitializer {
 	public static final String MODID = "geoactivity";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 	public static final ItemGroup GEOACTIVITY_GROUP = FabricItemGroupBuilder.build(new Identifier(MODID, "group"), () -> new ItemStack(GAObjects.ANTHRACITE_COAL));
+	public static GAConfig config;
 
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Initializing...");
+		AutoConfig.register(GAConfig.class, GsonConfigSerializer::new);
+		config = AutoConfig.getConfigHolder(GAConfig.class).getConfig();
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
 			opMe(dispatcher);
 		  });
 	
 		GAObjects.init();
+		GAConfiguredFeatures.init();
 		LOGGER.info("Initialized!");
 	}
 
