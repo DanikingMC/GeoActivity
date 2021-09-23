@@ -1,0 +1,8 @@
+{
+    "replace": false,
+    "values": [
+        "geoactivity:lignite_ore",
+        "geoactivity:bituminous_ore",
+        "geoactivity:anthracite_ore"
+    ]
+}

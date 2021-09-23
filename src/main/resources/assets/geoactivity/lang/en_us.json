@@ -1,0 +1,10 @@
+{
+    "itemGroup.geoactivity.group": "GeoActivity",
+    "item.geoactivity.lignite_coal": "Lignite Coal",
+    "item.geoactivity.bituminous_coal": "Bituminous Coal",
+    "item.geoactivity.anthracite_coal": "Anthracite Coal",
+    "block.geoactivity.lignite_ore": "Lignite Ore",
+    "block.geoactivity.bituminous_ore": "Bituminous Ore",
+    "block.geoactivity.anthracite_ore": "Anthracite Ore"
+
+}
