@@ -2,6 +2,7 @@ package geoactivity.client.gui.screen.handler;
 
 import geoactivity.common.item.GACoalItem;
 import geoactivity.common.registry.GAScreenHandlerTypes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
@@ -17,12 +18,11 @@ public class CoalRefinerScreenHandler extends GAScreenHandler {
 
     public CoalRefinerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(GAScreenHandlerTypes.COAL_REFINER, syncId, playerInventory, inventory);
-        this.playerBuilder()
-                .setup()
-                .containerBuilder()
-                .slot(0, 31, 36, CoalRefinerScreenHandler::matchesFuel)//fuel
-                .slot(1, 71, 36, CoalRefinerScreenHandler::matchesRecipe)//input
-                .output(2, 128, 36);//output
+        this.builder()
+                .slot(0, 31, 36, CoalRefinerScreenHandler::matchesFuel)
+                .slot(1, 71, 36, CoalRefinerScreenHandler::matchesRecipe)
+                .output(2, 128, 36)
+                .parent().drawPlayerSlots();
     }
 
     public static boolean matchesFuel(final ItemStack stack) {
@@ -34,5 +34,9 @@ public class CoalRefinerScreenHandler extends GAScreenHandler {
         final Item item = stack.getItem();
         return item instanceof GACoalItem;
     }
-    
+
+    @Override
+    public ItemStack transferSlot(PlayerEntity player, int index) {
+        return super.transferSlot(player, index);
+    }
 }

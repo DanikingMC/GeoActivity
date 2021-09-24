@@ -31,6 +31,10 @@ public final class ContainerSlotBuilder {
         return this;
     }
 
+    public GAScreenHandler parent() {
+        return parent;
+    }
+
     static class GAInputSlot extends Slot {
 
         private final Predicate<ItemStack> canInsert;
