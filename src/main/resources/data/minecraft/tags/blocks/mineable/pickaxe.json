@@ -3,6 +3,7 @@
     "values": [
         "geoactivity:lignite_ore",
         "geoactivity:bituminous_ore",
-        "geoactivity:anthracite_ore"
+        "geoactivity:anthracite_ore",
+        "geoactivity:coal_refiner"
     ]
 }

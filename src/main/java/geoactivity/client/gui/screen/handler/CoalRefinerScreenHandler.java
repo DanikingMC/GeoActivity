@@ -1,0 +1,38 @@
+package geoactivity.client.gui.screen.handler;
+
+import geoactivity.common.item.GACoalItem;
+import geoactivity.common.registry.GAScreenHandlerTypes;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+
+public class CoalRefinerScreenHandler extends GAScreenHandler {
+
+    public CoalRefinerScreenHandler(int syncId, PlayerInventory playerInventory) {
+        this(syncId, playerInventory, new SimpleInventory(3));
+    }
+
+    public CoalRefinerScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+        super(GAScreenHandlerTypes.COAL_REFINER, syncId, playerInventory, inventory);
+        this.playerBuilder()
+                .setup()
+                .containerBuilder()
+                .slot(0, 31, 36, CoalRefinerScreenHandler::matchesFuel)//fuel
+                .slot(1, 71, 36, CoalRefinerScreenHandler::matchesRecipe)//input
+                .output(2, 128, 36);//output
+    }
+
+    public static boolean matchesFuel(final ItemStack stack) {
+        final Item item = stack.getItem();
+        return item instanceof GACoalItem || item == Items.COAL || item == Items.CHARCOAL;
+    }
+
+    public static boolean matchesRecipe(final ItemStack stack) {
+        final Item item = stack.getItem();
+        return item instanceof GACoalItem;
+    }
+    
+}

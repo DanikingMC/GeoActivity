@@ -2,6 +2,7 @@
     "replace": false,
     "values": [
         "geoactivity:lignite_ore",
-        "geoactivity:bituminous_ore"
+        "geoactivity:bituminous_ore",
+        "geoactivity:coal_refiner"
     ]
 }

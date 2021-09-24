@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import geoactivity.common.registry.GABlockEntityTypes;
 import geoactivity.common.registry.GAConfiguredFeatures;
 import geoactivity.common.registry.GAObjects;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -37,6 +38,7 @@ public class GeoActivity implements ModInitializer {
 		  });
 	
 		GAObjects.init();
+		GABlockEntityTypes.init();
 		GAConfiguredFeatures.init();
 		LOGGER.info("Initialized!");
 	}

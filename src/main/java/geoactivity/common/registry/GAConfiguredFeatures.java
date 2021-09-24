@@ -21,7 +21,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 
 @SuppressWarnings("deprecation")
-public class GAConfiguredFeatures {
+public final class GAConfiguredFeatures {
     
     private static final GAConfig CONFIG = GeoActivity.config;
     
