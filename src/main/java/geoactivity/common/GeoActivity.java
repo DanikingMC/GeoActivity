@@ -1,5 +1,6 @@
 package geoactivity.common;
 
+import geoactivity.common.registry.GARecipeTypes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -39,6 +40,7 @@ public class GeoActivity implements ModInitializer {
 	
 		GAObjects.init();
 		GABlockEntityTypes.init();
+		GARecipeTypes.init();
 		GAConfiguredFeatures.init();
 		LOGGER.info("Initialized!");
 	}

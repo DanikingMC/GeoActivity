@@ -19,15 +19,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public abstract class GABlockEntityBase extends BlockEntity implements BlockEntityTicker<GABlockEntityBase>, NamedScreenHandlerFactory, SidedInventory {
+public abstract class GABlockEntityBase extends BlockEntity implements NamedScreenHandlerFactory, SidedInventory {
 
-    private final int size;
     private final DefaultedList<ItemStack> inventory;
 
     public GABlockEntityBase(final BlockEntityType<?> type, final int size, final BlockPos pos, final BlockState state) {
         super(type, pos, state);
-        this.size = size;
-        this.inventory = DefaultedList.ofSize(this.size, ItemStack.EMPTY);
+        this.inventory = DefaultedList.ofSize(size, ItemStack.EMPTY);
     }
 
     
@@ -37,11 +35,6 @@ public abstract class GABlockEntityBase extends BlockEntity implements BlockEnti
         return new TranslatableText(this.getCachedState().getBlock().getTranslationKey());
     }
 
-
-    @Override
-    public void tick(World world, BlockPos pos, BlockState state, GABlockEntityBase blockEntity) {
-      
-    }
 
     //loads the inventory
     @Override
@@ -94,6 +87,7 @@ public abstract class GABlockEntityBase extends BlockEntity implements BlockEnti
 		if (stack.getCount() > this.getMaxCountPerStack()) {
 			stack.setCount(this.getMaxCountPerStack());
 		}
+		this.markDirty();
     }
 
     @Override
