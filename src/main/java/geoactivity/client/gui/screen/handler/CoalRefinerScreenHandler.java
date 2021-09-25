@@ -1,6 +1,8 @@
 package geoactivity.client.gui.screen.handler;
 
 import geoactivity.common.item.GACoalItem;
+import geoactivity.common.recipe.RefinementRecipe;
+import geoactivity.common.registry.GARecipeTypes;
 import geoactivity.common.registry.GAScreenHandlerTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -25,21 +27,11 @@ public class CoalRefinerScreenHandler extends GAScreenHandler {
         this.propertyDelegate = propertyDelegate;
         this.addProperties(this.propertyDelegate);
         this.builder()
-                .slot(0, 31, 36, CoalRefinerScreenHandler::matchesFuel)
-                .slot(1, 71, 36, CoalRefinerScreenHandler::matchesRecipe)
+                .slot(0, 31, 36)
+                .slot(1, 71, 36)
                 .output(2, 128, 36)
                 .parent().drawPlayerSlots();
 
-    }
-
-    public static boolean matchesFuel(final ItemStack stack) {
-        final Item item = stack.getItem();
-        return item instanceof GACoalItem || item == Items.COAL || item == Items.CHARCOAL;
-    }
-
-    public static boolean matchesRecipe(final ItemStack stack) {
-        final Item item = stack.getItem();
-        return item instanceof GACoalItem;
     }
 
     @Override
@@ -66,17 +58,4 @@ public class CoalRefinerScreenHandler extends GAScreenHandler {
         return this.propertyDelegate.get(0) > 0;
     }
 
-//    public int scaledProgress(final int scale) {
-//        if (this.propertyDelegate.get(3) > 0) {
-//            return this.propertyDelegate.get(2) * scale / this.propertyDelegate.get(3);
-//        }
-//        return 0;
-//    }
-//
-//    public int scaledBurnTime(final int scale) {
-//        if (this.propertyDelegate.get(1) == 0) {
-//            return 0;
-//        }
-//        return this.propertyDelegate.get(0) * scale / this.propertyDelegate.get(1);
-//    }
 }

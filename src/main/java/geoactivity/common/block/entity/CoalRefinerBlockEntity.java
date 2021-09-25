@@ -4,12 +4,14 @@ import geoactivity.client.gui.screen.handler.CoalRefinerScreenHandler;
 import geoactivity.common.block.CoalRefinerBlock;
 import geoactivity.common.recipe.RefinementRecipe;
 import geoactivity.common.registry.GABlockEntityTypes;
+import geoactivity.common.registry.GAObjects;
 import geoactivity.common.registry.GARecipeTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.PropertyDelegate;
@@ -63,9 +65,20 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
         if (stack.isEmpty()) {
             return 0;
         }
-        return AbstractFurnaceBlockEntity.createFuelTimeMap().getOrDefault(stack.getItem(), 0);
+        final Item item = stack.getItem();
+        if (item == GAObjects.LIGNITE_COAL) {
+            return 3200;
+        }
+        if (item == GAObjects.BITUMINOUS_COAL) {
+            return 6400;
+        }
+        if (item == GAObjects.ANTHRACITE_COAL) {
+            return 9600;
+        }
+        return (AbstractFurnaceBlockEntity.createFuelTimeMap().getOrDefault(stack.getItem(), 0) / 4);
     }
 
+    @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         this.burnTime = nbt.getShort("BurnTime");
@@ -74,6 +87,7 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
         this.fuelTime = this.getItemBurnTime(this.getStack(fuelSlot));
     }
 
+    @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         nbt.putShort("BurnTime", (short)this.burnTime);
@@ -109,7 +123,7 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
                     .orElse(null);
 
             if (recipe != null) {
-                blockEntity.cookTimeTotal = 40;
+                blockEntity.cookTimeTotal = recipe.getTime();
                 if (!blockEntity.isBurning() && canSmelt(blockEntity, recipe)) {
                     blockEntity.burnTime = blockEntity.getItemBurnTime(blockEntity.getStack(blockEntity.fuelSlot));
                     blockEntity.fuelTime = blockEntity.burnTime;
@@ -133,8 +147,6 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
                         smeltItem(blockEntity, recipe);
                         dirty = true;
                     }
-                } else {
-                    blockEntity.cookTime = 0;
                 }
                 if (isBurning != blockEntity.isBurning()) {
                     world.setBlockState(pos, state.with(CoalRefinerBlock.LIT, blockEntity.isBurning()), Block.NOTIFY_ALL);
@@ -182,7 +194,7 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
             return false;
         }
         int nextCount = outputStack.getCount() + recipeOutput.getCount();
-        return (nextCount < blockEntity.getMaxCountPerStack() && nextCount < recipeOutput.getMaxCount());
+        return (nextCount <= blockEntity.getMaxCountPerStack() && nextCount <= recipeOutput.getMaxCount());
     }
 
     @Override
@@ -192,17 +204,20 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
 
     @Override
     public int[] getAvailableSlots(Direction side) {
-        return null;
+        return new int[] {0, 1, 2};
     }
-
+    //TODO: Add a case for slot 1 (input slot)
     @Override
     public boolean canInsert(int slot, ItemStack stack, Direction dir) {
-        return false;
+        if (slot == 0) {
+            return this.getItemBurnTime(stack) > 0;
+        }
+        return true;
     }
 
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
-        return false;
+        return slot == 2;
     }
 
 }

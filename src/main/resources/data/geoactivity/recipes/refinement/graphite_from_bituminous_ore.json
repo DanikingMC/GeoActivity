@@ -1,7 +1,7 @@
 {
   "type": "geoactivity:refinement",
   "ingredient": {
-	"item": "geoactivity:lignite_coal"
+	"item": "geoactivity:bituminous_ore"
   },
   "result": {
     "item": "geoactivity:graphite",

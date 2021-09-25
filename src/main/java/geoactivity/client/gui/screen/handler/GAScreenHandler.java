@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.world.World;
 
 /**
  * Base screen handler object for all containers of the mod
@@ -16,12 +17,16 @@ public abstract class GAScreenHandler extends ScreenHandler {
 
     private final PlayerInventory playerInventory;
     private final Inventory inventory;
+    protected final PlayerEntity player;
+    protected final World world;
     private int lastIndex;
 
     protected GAScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(type, syncId);
         this.playerInventory = playerInventory;
         this.inventory = inventory;
+        this.player = playerInventory.player;
+        this.world = player.world;
     }
 
     @Override

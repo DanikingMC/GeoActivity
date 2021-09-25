@@ -27,11 +27,6 @@ public class RefinementRecipe implements Recipe<Inventory> {
     }
 
     @Override
-    public boolean isIgnoredInRecipeBook() {
-        return true;
-    }
-
-    @Override
     public boolean matches(Inventory inventory, World world) {
         return false;
     }
@@ -67,8 +62,6 @@ public class RefinementRecipe implements Recipe<Inventory> {
     public Ingredient getInput() {
         return input;
     }
-
-
 
     @Override
     public RecipeSerializer<?> getSerializer() {

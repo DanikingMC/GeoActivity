@@ -1,11 +1,10 @@
 {
   "type": "geoactivity:refinement",
   "ingredient": {
-	"item": "geoactivity:lignite_coal"
+	"item": "minecraft:coal"
   },
   "result": {
-    "item": "geoactivity:graphite",
-    "count": 8
+    "item": "geoactivity:graphite"
   },
   "time": 400,
   "experience": 0.2
