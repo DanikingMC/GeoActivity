@@ -47,17 +47,36 @@ public class CoalRefinerScreenHandler extends GAScreenHandler {
         return super.transferSlot(player, index);
     }
 
-    public int getProgressScaled(final int scale) {
-        if (this.propertyDelegate.get(3) > 0) {
-            return this.propertyDelegate.get(2) * scale / this.propertyDelegate.get(3);
-        }
-        return 0;
+    public int getCookProgress() {
+        int i = this.propertyDelegate.get(2);
+        int j = this.propertyDelegate.get(3);
+        return j != 0 && i != 0 ? i * 24 / j : 0;
     }
 
-    public int getBurnTimeRemainingScaled(final int scale) {
-        if (this.propertyDelegate.get(1) == 0) {
-            return 0;
+    public int getFuelProgress() {
+        int i = this.propertyDelegate.get(1);
+        if (i == 0) {
+            i = 200;
         }
-        return this.propertyDelegate.get(0) * scale / this.propertyDelegate.get(1);
+
+        return this.propertyDelegate.get(0) * 13 / i;
     }
+
+    public boolean isBurning() {
+        return this.propertyDelegate.get(0) > 0;
+    }
+
+//    public int scaledProgress(final int scale) {
+//        if (this.propertyDelegate.get(3) > 0) {
+//            return this.propertyDelegate.get(2) * scale / this.propertyDelegate.get(3);
+//        }
+//        return 0;
+//    }
+//
+//    public int scaledBurnTime(final int scale) {
+//        if (this.propertyDelegate.get(1) == 0) {
+//            return 0;
+//        }
+//        return this.propertyDelegate.get(0) * scale / this.propertyDelegate.get(1);
+//    }
 }

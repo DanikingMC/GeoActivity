@@ -18,7 +18,7 @@ public class CoalRefinerScreen extends GAHandledScreen<CoalRefinerScreenHandler>
         this.builder().drawSlot(matrices, this.left() + 30, slotPosY);
         this.builder().drawSlot(matrices, this.left() + 70, slotPosY);
         this.builder().drawOutputSlot(matrices, this.left() + 123, slotPosY - 4);
-        this.builder().drawBurningProgress(matrices, this.left() + 51, slotPosY + 2, handler.getBurnTimeRemainingScaled(100), mouseX, mouseY);
-        this.builder().drawProgress(matrices, this.left() + 93, slotPosY + 1, this.getScreenHandler().getProgressScaled(24), mouseX, mouseY);
+        this.builder().drawBurningProgress(matrices, handler.isBurning(), handler.getFuelProgress(),this.left() + 51, slotPosY + 2,  mouseX, mouseY);
+        this.builder().drawProgress(matrices, this.left() + 93, slotPosY + 1, handler.getCookProgress(), mouseX, mouseY);
     }
 }

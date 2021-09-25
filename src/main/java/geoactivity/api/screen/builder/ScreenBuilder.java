@@ -57,13 +57,12 @@ public final class ScreenBuilder {
         }
     }
 
-    public void drawBurningProgress(final MatrixStack matrixStack, final int posX, final int posY, int progress, final int mouseX, final int mouseY) {
+    public void drawBurningProgress(final MatrixStack matrixStack, final boolean isBurning, final int scaledProgress, final int posX, final int posY, final int mouseX, final int mouseY) {
         this.bindTexture();
-        final int maxProgress = 100;
         this.parent.drawTexture(matrixStack, posX, posY, 240, 33, 14,14);
-        int j = 13 - (int) ((double) progress / (double) maxProgress * 13);
-        if (j > 0) {
-            this.parent.drawTexture(matrixStack, posX, posY + j, 240, 18 + j, 14,14 - j);
+        if (isBurning) {
+            //placed on top
+            this.parent.drawTexture(matrixStack, posX, (posY + 12) - scaledProgress, 240, 31 - scaledProgress, 14, scaledProgress + 1);
         }
     }
 
@@ -74,4 +73,5 @@ public final class ScreenBuilder {
     public void bindTexture(final Identifier texture) {
         RenderSystem.setShaderTexture(0, texture);
     }
+
 }

@@ -110,7 +110,7 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
 
             if (recipe != null) {
                 blockEntity.cookTimeTotal = 40;
-                if (!isBurning && canSmelt(blockEntity, recipe)) {
+                if (!blockEntity.isBurning() && canSmelt(blockEntity, recipe)) {
                     blockEntity.burnTime = blockEntity.getItemBurnTime(blockEntity.getStack(blockEntity.fuelSlot));
                     blockEntity.fuelTime = blockEntity.burnTime;
                     if (blockEntity.isBurning()) {
@@ -133,7 +133,7 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
                         smeltItem(blockEntity, recipe);
                         dirty = true;
                     }
-                } else if (!canSmelt(blockEntity, recipe)) {
+                } else {
                     blockEntity.cookTime = 0;
                 }
                 if (isBurning != blockEntity.isBurning()) {
@@ -142,8 +142,9 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
                 if (dirty) {
                     blockEntity.markDirty();
                 }
+            } else {
+                blockEntity.cookTime = 0;
             }
-
         }
     }
 
