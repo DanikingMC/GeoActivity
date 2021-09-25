@@ -10,21 +10,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.world.World;
 
-public class RefinementRecipe implements Recipe<Inventory> {
-
-    private final Identifier identifier;
-    private final Ingredient input;
-    private final ItemStack output;
-    private final float experience;
-    private final int time;
-
-    public RefinementRecipe(Identifier identifier, Ingredient input, ItemStack output, float experience, int time) {
-        this.identifier = identifier;
-        this.input = input;
-        this.output = output;
-        this.experience = experience;
-        this.time = time;
-    }
+public record RefinementRecipe(Identifier identifier, Ingredient input, ItemStack output, float experience, int time) implements Recipe<Inventory> {
 
     @Override
     public boolean matches(Inventory inventory, World world) {
@@ -77,7 +63,7 @@ public class RefinementRecipe implements Recipe<Inventory> {
 
         @Override
         public RefinementRecipe read(Identifier id, JsonObject json) {
-            return new RefinementRecipe(id, Ingredient.fromJson(JsonHelper.getObject(json, "ingredient")),  ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result")), JsonHelper.getFloat(json, "experience"), JsonHelper.getInt(json, "time"));
+            return new RefinementRecipe(id, Ingredient.fromJson(JsonHelper.getObject(json, "ingredient")), ShapedRecipe.outputFromJson(JsonHelper.getObject(json, "result")), JsonHelper.getFloat(json, "experience"), JsonHelper.getInt(json, "time"));
         }
 
         @Override
