@@ -1,6 +1,7 @@
 package geoactivity.client.gui.screen.handler;
 
 import geoactivity.api.screen.builder.ContainerSlotBuilder;
+import geoactivity.client.gui.screen.handler.slot.GAOutputSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -43,6 +44,7 @@ public abstract class GAScreenHandler extends ScreenHandler {
                         if (!this.insertItem(stackInSlot, this.inventory.size(), this.slots.size(), true)) {
                             return ItemStack.EMPTY;
                         }
+
                     } else {
                         return ItemStack.EMPTY;
                     }
@@ -59,11 +61,18 @@ public abstract class GAScreenHandler extends ScreenHandler {
                     }
                 }
             }
+
+
             if (stackInSlot.isEmpty()) {
                 slot.setStack(ItemStack.EMPTY);
             } else {
                 slot.markDirty();
             }
+
+            if (stackInSlot.getCount() == stackCopy.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
         }
 
         return stackCopy;

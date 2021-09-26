@@ -12,6 +12,7 @@ import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
@@ -100,5 +101,9 @@ public abstract class GABlockEntityBase extends BlockEntity implements NamedScre
         return player -> (this.getWorld().getBlockEntity(this.getPos()) == this && player.getPos().distanceTo(Vec3d.of(this.getPos())) < 16);
     }
 
-    
+    //Output slot
+    public void dropExperience(final ServerWorld world, Vec3d pos, int amount) {
+
+    }
+
 }

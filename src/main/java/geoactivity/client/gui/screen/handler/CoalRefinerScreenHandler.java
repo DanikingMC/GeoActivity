@@ -1,18 +1,15 @@
 package geoactivity.client.gui.screen.handler;
 
-import geoactivity.common.item.GACoalItem;
-import geoactivity.common.recipe.RefinementRecipe;
-import geoactivity.common.registry.GARecipeTypes;
+import geoactivity.client.gui.screen.handler.slot.GAOutputSlot;
 import geoactivity.common.registry.GAScreenHandlerTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.slot.Slot;
 
 public class CoalRefinerScreenHandler extends GAScreenHandler {
 
@@ -29,13 +26,18 @@ public class CoalRefinerScreenHandler extends GAScreenHandler {
         this.builder()
                 .slot(0, 31, 36)
                 .slot(1, 71, 36)
-                .output(2, 128, 36)
+                .output(2, 128, 36, always -> true)
                 .parent().drawPlayerSlots();
 
     }
 
+
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
+        final Slot slot = this.getSlot(index);
+        if (index == 2 && slot.hasStack()) {
+            ((GAOutputSlot) this.getSlot(index)).onCrafted(slot.getStack());
+        }
         return super.transferSlot(player, index);
     }
 

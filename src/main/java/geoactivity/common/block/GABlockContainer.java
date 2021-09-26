@@ -9,6 +9,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -60,11 +61,19 @@ public abstract class GABlockContainer extends BlockWithEntity {
             if (blockEntity instanceof GABlockEntityBase) {
                 if (world instanceof ServerWorld) {
                     ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
-                    //((GABlockEntityBase)blockEntity).getRecipesUsedAndDropExperience((ServerWorld)world, Vec3d.ofCenter(pos));
+                    ((GABlockEntityBase)blockEntity).dropExperience((ServerWorld)world, Vec3d.ofCenter(pos), 0);
                 }
                 world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
         }
+    }
+
+    public boolean hasComparatorOutput(BlockState state) {
+        return true;
+    }
+
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
     }
 }

@@ -1,6 +1,8 @@
 package geoactivity.api.screen.builder;
 
 import geoactivity.client.gui.screen.handler.GAScreenHandler;
+import geoactivity.client.gui.screen.handler.slot.GAOutputSlot;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
@@ -11,10 +13,12 @@ public final class ContainerSlotBuilder {
 
     private final GAScreenHandler parent;
     private final Inventory container;
+    private final PlayerEntity player;
 
     public ContainerSlotBuilder(final GAScreenHandler parent) {
         this.parent = parent;
         this.container = parent.getInventory();
+        this.player = parent.getPlayerInventory().player;
     }
 
     public ContainerSlotBuilder slot(final int index, final int posX, final int posY) {
@@ -27,7 +31,12 @@ public final class ContainerSlotBuilder {
     }
 
     public ContainerSlotBuilder output(final int index, final int posX, final int posY) {
-        this.parent.addSlot(new GAOutputSlot(this.container, index, posX, posY));
+        this.parent.addSlot(new GAOutputSlot(this.player, this.container, index, posX, posY));
+        return this;
+    }
+
+    public ContainerSlotBuilder output(final int index, final int posX, final int posY, final Predicate<ItemStack> dropExperience) {
+        this.parent.addSlot(new GAOutputSlot(this.player, this.container, index, posX, posY, dropExperience));
         return this;
     }
 
@@ -50,15 +59,5 @@ public final class ContainerSlotBuilder {
         }
     }
 
-    static class GAOutputSlot extends Slot {
 
-        public GAOutputSlot(Inventory inventory, int index, int x, int y) {
-            super(inventory, index, x, y);
-        }
-
-        @Override
-        public boolean canInsert(ItemStack stack) {
-            return false;
-        }
-    }
 }

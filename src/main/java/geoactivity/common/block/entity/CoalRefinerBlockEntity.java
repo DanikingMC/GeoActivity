@@ -2,6 +2,7 @@ package geoactivity.common.block.entity;
 
 import geoactivity.client.gui.screen.handler.CoalRefinerScreenHandler;
 import geoactivity.common.block.CoalRefinerBlock;
+import geoactivity.common.item.GACoalItem;
 import geoactivity.common.recipe.RefinementRecipe;
 import geoactivity.common.registry.GABlockEntityTypes;
 import geoactivity.common.registry.GAObjects;
@@ -9,17 +10,24 @@ import geoactivity.common.registry.GARecipeTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class CoalRefinerBlockEntity extends GABlockEntityBase {
     
@@ -32,9 +40,13 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
     private int fuelTime;
     private int cookTime;
     private int cookTimeTotal;
+    private float experience;
+
+    private RefinementRecipe recipe = null;
 
     public CoalRefinerBlockEntity(BlockPos pos, BlockState state) {
         super(GABlockEntityTypes.COAL_REFINER, 3, pos, state);
+
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
@@ -85,6 +97,8 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
         this.cookTime = nbt.getShort("CookTime");
         this.cookTimeTotal = nbt.getShort("CookTimeTotal");
         this.fuelTime = this.getItemBurnTime(this.getStack(fuelSlot));
+        this.experience = nbt.getFloat("Experience");
+
     }
 
     @Override
@@ -93,8 +107,11 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
         nbt.putShort("BurnTime", (short)this.burnTime);
         nbt.putShort("CookTime", (short)this.cookTime);
         nbt.putShort("CookTimeTotal", (short)this.cookTimeTotal);
+        nbt.putFloat("Experience", this.experience);
         return nbt;
     }
+
+
 
     private boolean isBurning() {
         return this.burnTime > 0;
@@ -105,9 +122,8 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
             return;
         }
         if (!world.isClient) {
-            final boolean isBurning = blockEntity.isBurning();
             boolean dirty = false;
-            if (isBurning) {
+            if (blockEntity.isBurning()) {
                 --blockEntity.burnTime;
             } else {
                 //if no fuel remaining, decrement progress
@@ -115,16 +131,18 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
                     blockEntity.cookTime = MathHelper.clamp((blockEntity.cookTime - 2), 0, blockEntity.cookTimeTotal);
                 }
             }
-            final RefinementRecipe recipe = world.getRecipeManager()
+
+            blockEntity.recipe = world.getRecipeManager()
                     .listAllOfType(GARecipeTypes.REFINEMENT_RECIPE_TYPE)
                     .stream()
-                    .filter(refinementRecipe -> refinementRecipe.getInput().test(blockEntity.getStack(blockEntity.inputSlot)))
+                    .filter(refinementRecipe -> refinementRecipe.input().test(blockEntity.getStack(blockEntity.inputSlot)))
                     .findFirst()
                     .orElse(null);
 
-            if (recipe != null) {
-                blockEntity.cookTimeTotal = recipe.getTime();
-                if (!blockEntity.isBurning() && canSmelt(blockEntity, recipe)) {
+            if (blockEntity.recipe != null) {
+
+                blockEntity.cookTimeTotal = 40;
+                if (!blockEntity.isBurning() && canSmelt(blockEntity, blockEntity.recipe)) {
                     blockEntity.burnTime = blockEntity.getItemBurnTime(blockEntity.getStack(blockEntity.fuelSlot));
                     blockEntity.fuelTime = blockEntity.burnTime;
                     if (blockEntity.isBurning()) {
@@ -139,18 +157,19 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
                         }
                     }
                 }
-                if (blockEntity.isBurning() && canSmelt(blockEntity, recipe)) {
+
+                if (blockEntity.isBurning() && canSmelt(blockEntity, blockEntity.recipe)) {
                     ++blockEntity.cookTime;
                     if (blockEntity.cookTime == blockEntity.cookTimeTotal) {
                         blockEntity.cookTime = 0;
-                        blockEntity.cookTimeTotal = recipe.getTime();
-                        smeltItem(blockEntity, recipe);
+                        blockEntity.cookTimeTotal = blockEntity.recipe.time();
+                        smeltItem(blockEntity, blockEntity.recipe);
                         dirty = true;
                     }
                 }
-                if (isBurning != blockEntity.isBurning()) {
-                    world.setBlockState(pos, state.with(CoalRefinerBlock.LIT, blockEntity.isBurning()), Block.NOTIFY_ALL);
-                }
+
+                world.setBlockState(pos, state.with(CoalRefinerBlock.LIT, blockEntity.isBurning()), Block.NOTIFY_ALL);
+
                 if (dirty) {
                     blockEntity.markDirty();
                 }
@@ -174,6 +193,7 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
         } else if (outputStack.isOf(recipeOutput.getItem())) {
             outputStack.increment(recipeOutput.getCount());
         }
+        blockEntity.experience = recipe.experience();
         blockEntity.getStack(blockEntity.inputSlot).decrement(1);
 
     }
@@ -206,18 +226,40 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
     public int[] getAvailableSlots(Direction side) {
         return new int[] {0, 1, 2};
     }
-    //TODO: Add a case for slot 1 (input slot)
+    //TODO: use tags for inserting stuff.
+
     @Override
     public boolean canInsert(int slot, ItemStack stack, Direction dir) {
         if (slot == 0) {
             return this.getItemBurnTime(stack) > 0;
         }
-        return true;
+        if (slot == 1) {
+            return stack.getItem() instanceof GACoalItem || stack.getItem() == Items.COAL;
+        }
+        return false;
     }
 
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction dir) {
         return slot == 2;
     }
+
+
+    @Override
+    public void dropExperience(final ServerWorld world, Vec3d pos, int amount) {
+
+        final int round = MathHelper.floor(amount * this.experience);
+        //output slot
+        if (this.experience > 0 && amount > 0) {
+            ExperienceOrbEntity.spawn(world, pos, round);
+        }
+
+        //on break
+        if (amount == 0 && this.experience > 0) {
+            ExperienceOrbEntity.spawn(world, pos, (int) (8 * this.experience));
+        }
+        this.experience = 0;
+    }
+
 
 }

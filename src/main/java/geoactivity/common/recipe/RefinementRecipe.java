@@ -37,17 +37,6 @@ public record RefinementRecipe(Identifier identifier, Ingredient input, ItemStac
         return this.identifier;
     }
 
-    public float getExperience() {
-        return experience;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public Ingredient getInput() {
-        return input;
-    }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
@@ -74,9 +63,9 @@ public record RefinementRecipe(Identifier identifier, Ingredient input, ItemStac
         @Override
         public void write(PacketByteBuf buf, RefinementRecipe recipe) {
             recipe.input.write(buf);
-            buf.writeItemStack(recipe.output);
-            buf.writeFloat(recipe.getExperience());
-            buf.writeInt(recipe.getTime());
+            buf.writeItemStack(recipe.output());
+            buf.writeFloat(recipe.experience());
+            buf.writeInt(recipe.time());
         }
     }
 }

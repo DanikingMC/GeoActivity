@@ -36,7 +36,8 @@ public final class GAObjects {
     public static final Block LIGNITE_ORE = register("lignite_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(1, 3)));
     public static final Block BITUMINOUS_ORE = register("bituminous_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(2, 5)));
     public static final Block ANTHRACITE_ORE = register("anthracite_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(3, 7)));
-    public static final Block COAL_REFINER = register("coal_refiner", new CoalRefinerBlock(settings(Material.METAL, 3.5F, 15.0F).requiresTool().sounds(BlockSoundGroup.STONE)));
+    public static final Block COAL_REFINER = register("coal_refiner", new CoalRefinerBlock(settings(Material.METAL, 3.5F, 15.0F).requiresTool().sounds(BlockSoundGroup.STONE).luminance(state -> state.get(CoalRefinerBlock.LIT) ? 13: 0)));
+
     /**
      * Inserts the item (value) into the map which its identifier (key).
      * @param <T> Item.
