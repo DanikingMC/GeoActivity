@@ -7,11 +7,15 @@ import geoactivity.common.GeoActivity;
 import geoactivity.common.block.CoalRefinerBlock;
 import geoactivity.common.block.GAOreBlock;
 import geoactivity.common.item.GACoalItem;
+import geoactivity.common.item.util.GAAxeItem;
+import geoactivity.common.item.util.GAHoeItem;
+import geoactivity.common.item.util.GAPickaxeItem;
+import geoactivity.common.item.util.ReinforcedMinerItem;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.*;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -32,10 +36,21 @@ public final class GAObjects {
     public static final Item BITUMINOUS_COAL = register("bituminous_coal", new GACoalItem(settings()));
     public static final Item ANTHRACITE_COAL = register("anthracite_coal", new GACoalItem(settings()));
     public static final Item GRAPHITE = register("graphite", new Item(settings()));
-
     public static final Block LIGNITE_ORE = register("lignite_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(1, 3)));
     public static final Block BITUMINOUS_ORE = register("bituminous_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(2, 5)));
+    //reinforced
     public static final Block ANTHRACITE_ORE = register("anthracite_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(3, 7)));
+    public static final Item REINFORCED_SWORD = register("reinforced_sword", new SwordItem(GAMaterials.REINFORCED_TOOL, 3, -2.4F,settings()));
+    public static final Item REINFORCED_PICKAXE = register("reinforced_pickaxe", new GAPickaxeItem(GAMaterials.REINFORCED_TOOL, 1, -2.8F,settings()));
+    public static final Item REINFORCED_AXE = register("reinforced_axe", new GAAxeItem(GAMaterials.REINFORCED_TOOL, 5.0F, -3.1F, settings()));
+    public static final Item REINFORCED_SHOVEL = register("reinforced_shovel", new ShovelItem(GAMaterials.REINFORCED_TOOL,1.5F, -3.0F,settings()));
+    public static final Item REINFORCED_HOE = register("reinforced_hoe", new GAHoeItem(GAMaterials.REINFORCED_TOOL, -3, 0.0F, settings()));
+    public static final Item REINFORCED_MINER = register("reinforced_miner", new ReinforcedMinerItem(1.25F, -2.9F, GAMaterials.REINFORCED_TOOL, settings()));
+    public static final Item REINFORCED_HELMET = register("reinforced_helmet", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.HEAD, settings()));
+    public static final Item REINFORCED_CHESTPLATE = register("reinforced_chestplate", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.CHEST, settings()));
+    public static final Item REINFORCED_LEGGINGS = register("reinforced_leggings", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.LEGS, settings()));
+    public static final Item REINFORCED_BOOTS = register("reinforced_boots", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.FEET, settings()));
+    //machines
     public static final Block COAL_REFINER = register("coal_refiner", new CoalRefinerBlock(settings(Material.METAL, 3.5F, 15.0F).requiresTool().sounds(BlockSoundGroup.STONE).luminance(state -> state.get(CoalRefinerBlock.LIT) ? 13: 0)));
 
     /**

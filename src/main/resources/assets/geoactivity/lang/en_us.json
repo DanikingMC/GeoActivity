@@ -8,6 +8,15 @@
     "block.geoactivity.bituminous_ore": "Bituminous Ore",
     "block.geoactivity.anthracite_ore": "Anthracite Ore",
     "block.geoactivity.coal_refiner": "Coal Refiner",
+    "item.geoactivity.reinforced_sword": "Reinforced Sword",
+    "item.geoactivity.reinforced_pickaxe": "Reinforced Pickaxe",
+    "item.geoactivity.reinforced_axe": "Reinforced Axe",
+    "item.geoactivity.reinforced_shovel": "Reinforced Shovel",
+    "item.geoactivity.reinforced_hoe": "Reinforced Hoe",
+    "item.geoactivity.reinforced_miner": "Reinforced Miner",
+    "item.geoactivity.reinforced_helmet": "Reinforced Helmet",
+    "item.geoactivity.reinforced_chestplate": "Reinforced Chestplate",
+    "item.geoactivity.reinforced_leggings": "Reinforced Leggings",
+    "item.geoactivity.reinforced_boots": "Reinforced Boots",
     "rei.geoactivity.refinement": "Refinement"
-
 }

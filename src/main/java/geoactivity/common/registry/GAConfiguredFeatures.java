@@ -25,7 +25,7 @@ public final class GAConfiguredFeatures {
     
     private static final GAConfig CONFIG = GeoActivity.config;
     
-    //Creates a new biome modification for the world
+    //Creates a new modification for the world
     private static final BiomeModification WORLD_GENERATOR = BiomeModifications.create(new Identifier(GeoActivity.MODID, "configure_features"));
 
     /**
