@@ -23,7 +23,11 @@
     ],
     "client": [
       "geoactivity.client.GeoActivityClient"
+    ],
+    "rei_plugins": [
+      "geoactivity.client.integration.rei.GAREIPlugin"
     ]
+
   },
   "mixins": [
     "geoactivity.mixins.json"

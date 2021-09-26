@@ -7,6 +7,7 @@
     "block.geoactivity.lignite_ore": "Lignite Ore",
     "block.geoactivity.bituminous_ore": "Bituminous Ore",
     "block.geoactivity.anthracite_ore": "Anthracite Ore",
-    "block.geoactivity.coal_refiner": "Coal Refiner"
+    "block.geoactivity.coal_refiner": "Coal Refiner",
+    "rei.geoactivity.refinement": "Refinement"
 
 }

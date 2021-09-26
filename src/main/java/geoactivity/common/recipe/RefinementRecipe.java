@@ -8,6 +8,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
 public record RefinementRecipe(Identifier identifier, Ingredient input, ItemStack output, float experience, int time) implements Recipe<Inventory> {
@@ -37,7 +38,6 @@ public record RefinementRecipe(Identifier identifier, Ingredient input, ItemStac
         return this.identifier;
     }
 
-
     @Override
     public RecipeSerializer<?> getSerializer() {
         return GARecipeTypes.REFINEMENT_RECIPE_SERIALIZER;
@@ -46,6 +46,13 @@ public record RefinementRecipe(Identifier identifier, Ingredient input, ItemStac
     @Override
     public RecipeType<?> getType() {
         return GARecipeTypes.REFINEMENT_RECIPE_TYPE;
+    }
+
+    @Override
+    public DefaultedList<Ingredient> getIngredients() {
+        final DefaultedList<Ingredient> ingredients = DefaultedList.of();
+        ingredients.add(this.input);
+        return ingredients;
     }
 
     public static class Serializer implements RecipeSerializer<RefinementRecipe> {

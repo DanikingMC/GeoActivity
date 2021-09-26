@@ -41,9 +41,7 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
     private int cookTime;
     private int cookTimeTotal;
     private float experience;
-
-    private RefinementRecipe recipe = null;
-
+    
     public CoalRefinerBlockEntity(BlockPos pos, BlockState state) {
         super(GABlockEntityTypes.COAL_REFINER, 3, pos, state);
 
@@ -132,17 +130,17 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
                 }
             }
 
-            blockEntity.recipe = world.getRecipeManager()
+            final RefinementRecipe recipe = world.getRecipeManager()
                     .listAllOfType(GARecipeTypes.REFINEMENT_RECIPE_TYPE)
                     .stream()
                     .filter(refinementRecipe -> refinementRecipe.input().test(blockEntity.getStack(blockEntity.inputSlot)))
                     .findFirst()
                     .orElse(null);
 
-            if (blockEntity.recipe != null) {
+            if (recipe != null) {
 
-                blockEntity.cookTimeTotal = 40;
-                if (!blockEntity.isBurning() && canSmelt(blockEntity, blockEntity.recipe)) {
+                blockEntity.cookTimeTotal = recipe.time();
+                if (!blockEntity.isBurning() && canSmelt(blockEntity, recipe)) {
                     blockEntity.burnTime = blockEntity.getItemBurnTime(blockEntity.getStack(blockEntity.fuelSlot));
                     blockEntity.fuelTime = blockEntity.burnTime;
                     if (blockEntity.isBurning()) {
@@ -158,12 +156,12 @@ public class CoalRefinerBlockEntity extends GABlockEntityBase {
                     }
                 }
 
-                if (blockEntity.isBurning() && canSmelt(blockEntity, blockEntity.recipe)) {
+                if (blockEntity.isBurning() && canSmelt(blockEntity, recipe)) {
                     ++blockEntity.cookTime;
                     if (blockEntity.cookTime == blockEntity.cookTimeTotal) {
                         blockEntity.cookTime = 0;
-                        blockEntity.cookTimeTotal = blockEntity.recipe.time();
-                        smeltItem(blockEntity, blockEntity.recipe);
+                        blockEntity.cookTimeTotal = recipe.time();
+                        smeltItem(blockEntity, recipe);
                         dirty = true;
                     }
                 }
