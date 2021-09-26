@@ -4,8 +4,7 @@
 	"item": "minecraft:coal_ore"
   },
   "result": {
-    "item": "geoactivity:graphite",
-    "count": 1
+    "item": "minecraft:coal"
   },
   "time": 400,
   "experience": 0.2

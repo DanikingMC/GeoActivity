@@ -20,7 +20,6 @@ public abstract class GAScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     protected final PlayerEntity player;
     protected final World world;
-    private int lastIndex;
 
     protected GAScreenHandler(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(type, syncId);
@@ -39,6 +38,10 @@ public abstract class GAScreenHandler extends ScreenHandler {
             stackCopy = stackInSlot.copy();
             //from block entity to the player inventory
             if (index < this.inventory.size()) {
+                if (slot instanceof GAOutputSlot) {
+                    slot.onQuickTransfer(stackInSlot, stackCopy);
+                    ((GAOutputSlot) this.getSlot(index)).onCrafted(slot.getStack());
+                }
                 for (int i = this.inventory.size(); i < this.slots.size() - 1; i++) {
                     if (this.getSlot(i).canInsert(stackInSlot)) {
                         if (!this.insertItem(stackInSlot, this.inventory.size(), this.slots.size(), true)) {
@@ -61,14 +64,11 @@ public abstract class GAScreenHandler extends ScreenHandler {
                     }
                 }
             }
-
-
             if (stackInSlot.isEmpty()) {
                 slot.setStack(ItemStack.EMPTY);
             } else {
                 slot.markDirty();
             }
-
             if (stackInSlot.getCount() == stackCopy.getCount()) {
                 return ItemStack.EMPTY;
             }

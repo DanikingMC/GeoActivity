@@ -4,9 +4,8 @@
 	"item": "geoactivity:bituminous_ore"
   },
   "result": {
-    "item": "geoactivity:graphite",
-    "count": 8
+    "item": "geoactivity:bituminous_coal"
   },
   "time": 400,
-  "experience": 0.2
+  "experience": 0.5
 }

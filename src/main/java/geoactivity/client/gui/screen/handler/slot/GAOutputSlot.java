@@ -1,6 +1,7 @@
 package geoactivity.client.gui.screen.handler.slot;
 
 import geoactivity.common.block.entity.GABlockEntityBase;
+import geoactivity.common.block.entity.SmelterBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
@@ -60,8 +61,8 @@ public class GAOutputSlot extends Slot {
         stack.onCraft(this.player.world, this.player, this.amount);
 
         if (this.dropExperience.test(stack)) {
-            if (this.world instanceof ServerWorld world && this.inventory instanceof GABlockEntityBase entity) {
-                entity.dropExperience(world, player.getPos(), amount);
+            if (this.world instanceof ServerWorld world && this.inventory instanceof SmelterBlockEntity entity) {
+                entity.dropExperience(world, player.getPos());
             }
         }
         this.amount = 0;

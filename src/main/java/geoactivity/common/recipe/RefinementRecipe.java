@@ -55,6 +55,11 @@ public record RefinementRecipe(Identifier identifier, Ingredient input, ItemStac
         return ingredients;
     }
 
+    @Override
+    public boolean isIgnoredInRecipeBook() {
+        return true;
+    }
+
     public static class Serializer implements RecipeSerializer<RefinementRecipe> {
 
         @Override

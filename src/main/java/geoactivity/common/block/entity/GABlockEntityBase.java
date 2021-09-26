@@ -100,10 +100,4 @@ public abstract class GABlockEntityBase extends BlockEntity implements NamedScre
     private Predicate<PlayerEntity> canUse() {
         return player -> (this.getWorld().getBlockEntity(this.getPos()) == this && player.getPos().distanceTo(Vec3d.of(this.getPos())) < 16);
     }
-
-    //Output slot
-    public void dropExperience(final ServerWorld world, Vec3d pos, int amount) {
-
-    }
-
 }

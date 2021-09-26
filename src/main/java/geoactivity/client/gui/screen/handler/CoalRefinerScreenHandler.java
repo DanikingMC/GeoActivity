@@ -31,16 +31,6 @@ public class CoalRefinerScreenHandler extends GAScreenHandler {
 
     }
 
-
-    @Override
-    public ItemStack transferSlot(PlayerEntity player, int index) {
-        final Slot slot = this.getSlot(index);
-        if (index == 2 && slot.hasStack()) {
-            ((GAOutputSlot) this.getSlot(index)).onCrafted(slot.getStack());
-        }
-        return super.transferSlot(player, index);
-    }
-
     public int getCookProgress() {
         int i = this.propertyDelegate.get(2);
         int j = this.propertyDelegate.get(3);

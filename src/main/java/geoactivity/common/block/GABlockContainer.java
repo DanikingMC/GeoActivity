@@ -1,6 +1,7 @@
 package geoactivity.common.block;
 
 import geoactivity.common.block.entity.GABlockEntityBase;
+import geoactivity.common.block.entity.SmelterBlockEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -61,7 +62,9 @@ public abstract class GABlockContainer extends BlockWithEntity {
             if (blockEntity instanceof GABlockEntityBase) {
                 if (world instanceof ServerWorld) {
                     ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
-                    ((GABlockEntityBase)blockEntity).dropExperience((ServerWorld)world, Vec3d.ofCenter(pos), 0);
+                    if (blockEntity instanceof SmelterBlockEntity entity) {
+                        entity.dropExperience((ServerWorld) world, Vec3d.ofCenter(pos));
+                    }
                 }
                 world.updateComparators(pos, this);
             }
