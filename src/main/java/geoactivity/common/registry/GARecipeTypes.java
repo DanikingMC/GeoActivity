@@ -1,10 +1,12 @@
 package geoactivity.common.registry;
 
 import geoactivity.common.GeoActivity;
+import geoactivity.common.recipe.CraftingExtendedRecipe;
 import geoactivity.common.recipe.RefinementRecipe;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -18,6 +20,8 @@ public class GARecipeTypes {
 
     public static final RecipeSerializer<RefinementRecipe> REFINEMENT_RECIPE_SERIALIZER = create("refinement", new  RefinementRecipe.Serializer());
     public static final RecipeType<RefinementRecipe> REFINEMENT_RECIPE_TYPE = create("refinement");
+
+    public static final RecipeSerializer<ShapedRecipe> CRAFTING_EXTENDED_RECIPE_SERIALIZER = create("crafting_extended", new CraftingExtendedRecipe.Serializer());
 
     private static <T extends Recipe<?>> RecipeSerializer<T> create(String name, RecipeSerializer<T> serializer) {
         RECIPE_SERIALIZERS.put(serializer, new Identifier(GeoActivity.MODID, name));

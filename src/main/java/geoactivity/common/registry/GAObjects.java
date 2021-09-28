@@ -36,6 +36,8 @@ public final class GAObjects {
     public static final Item BITUMINOUS_COAL = register("bituminous_coal", new GACoalItem(settings()));
     public static final Item ANTHRACITE_COAL = register("anthracite_coal", new GACoalItem(settings()));
     public static final Item GRAPHITE = register("graphite", new Item(settings()));
+    public static final Item CARBON_FIBER = register("carbon_fiber", new Item(settings()));
+    public static final Item CARBON_STICK = register("carbon_stick", new Item(settings()));
     public static final Block LIGNITE_ORE = register("lignite_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(1, 3)));
     public static final Block BITUMINOUS_ORE = register("bituminous_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(2, 5)));
     //reinforced
