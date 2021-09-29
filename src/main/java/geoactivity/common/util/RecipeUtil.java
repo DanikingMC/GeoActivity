@@ -12,7 +12,7 @@ import net.minecraft.util.registry.Registry;
 
 public class RecipeUtil {
 
-    public static ItemStack deserializeItemFromJson(JsonObject object) {
+    public static ItemStack deserializeItemFromJson(final JsonObject object) {
         final Identifier location = new Identifier(JsonHelper.getString(object, "item"));
         final Item item = Registry.ITEM.get(location);
         if (item == Items.AIR) {
@@ -25,6 +25,7 @@ public class RecipeUtil {
         final ItemStack jsonStack = new ItemStack(item);
         if (item instanceof Rechargeable) {
             jsonStack.setDamage(jsonStack.getMaxDamage() - 2);
+            RechargeableHelper.onCraft(jsonStack);
         }
         return jsonStack;
     }

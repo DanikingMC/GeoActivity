@@ -10,7 +10,7 @@ import geoactivity.common.item.GACoalItem;
 import geoactivity.common.item.util.GAAxeItem;
 import geoactivity.common.item.util.GAHoeItem;
 import geoactivity.common.item.util.GAPickaxeItem;
-import geoactivity.common.item.util.ReinforcedMinerItem;
+import geoactivity.common.item.ReinforcedMinerItem;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;

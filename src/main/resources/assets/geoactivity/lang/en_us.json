@@ -20,5 +20,8 @@
     "item.geoactivity.reinforced_chestplate": "Reinforced Chestplate",
     "item.geoactivity.reinforced_leggings": "Reinforced Leggings",
     "item.geoactivity.reinforced_boots": "Reinforced Boots",
+    "geoactivity.tooltip.destroyed": "Destroyed",
+    "geoactivity.tooltip.shift": "Shift",
+    "geoactivity.tooltip.more_info": "Hold %s for more info",
     "rei.geoactivity.refinement": "Refinement"
 }

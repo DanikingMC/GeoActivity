@@ -1,6 +1,6 @@
 package geoactivity.common;
 
-import geoactivity.common.registry.GARecipeTypes;
+import geoactivity.common.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -10,9 +10,6 @@ import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import geoactivity.common.registry.GABlockEntityTypes;
-import geoactivity.common.registry.GAConfiguredFeatures;
-import geoactivity.common.registry.GAObjects;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 
@@ -37,7 +34,7 @@ public class GeoActivity implements ModInitializer {
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
 			opMe(dispatcher);
 		  });
-	
+		GAEvents.init();
 		GAObjects.init();
 		GABlockEntityTypes.init();
 		GARecipeTypes.init();
