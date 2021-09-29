@@ -10,11 +10,11 @@ import net.minecraft.text.Text;
 
 import java.util.Objects;
 
-public class GAHandledScreen <T extends ScreenHandler> extends HandledScreen<T> {
+public class GuiBase<T extends ScreenHandler> extends HandledScreen<T> {
 
     private final ScreenBuilder builder;
 
-    public GAHandledScreen(T handler, PlayerInventory inventory, Text title) {
+    public GuiBase(T handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         this.builder = new ScreenBuilder(this);
     }
