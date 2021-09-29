@@ -1,4 +1,4 @@
-package geoactivity.api.screen.builder;
+package geoactivity.api.gui.handler.builder;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import geoactivity.common.GeoActivity;

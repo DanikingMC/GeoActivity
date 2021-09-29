@@ -2,7 +2,6 @@ package geoactivity.common.util;
 
 import geoactivity.api.item.Rechargeable;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -20,29 +19,6 @@ public class RechargeableHelper {
         setDestroyed(stack);
     }
 
-    public static boolean onEntityHit(final ItemStack stack, final PlayerEntity player) {
-        if (tryToSetDestroyed(stack)) {
-            return false;
-        }
-        if (!isDestroyed(stack)) {
-            stack.damage(2, player, ((e) -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND)));
-        }
-        return !isDestroyed(stack);
-    }
-
-    /**
-     * Tries to set destroyed nbt
-     * to the rechargeable stack
-     * @param stack ItemStack
-     * @return whether it was destroyed or not.
-     */
-    public static boolean tryToSetDestroyed(final ItemStack stack) {
-        if (isAlmostBroken(stack) && !isDestroyed(stack)) {
-            setDestroyed(stack);
-            return true;
-        }
-        return false;
-    }
     //Used on item tooltip event
     public static void loadTooltips(final ItemStack stack, final List<Text> tooltipList) {
         int i = NbtHelper.getKeys(stack).size();
@@ -60,6 +36,14 @@ public class RechargeableHelper {
         }
         if (isDestroyed(stack)) {
             tooltipList.add(index, new TranslatableText("geoactivity.tooltip.destroyed").formatted(Formatting.RED));
+        }
+    }
+
+    public static void initDestroyedNbt(PlayerEntity player, ItemStack stack) {
+        if (!player.isCreative()) {
+            if (isAlmostBroken(stack)) {
+                setDestroyed(stack);
+            }
         }
     }
 

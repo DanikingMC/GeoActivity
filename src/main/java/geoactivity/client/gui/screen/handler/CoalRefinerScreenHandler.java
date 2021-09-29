@@ -1,17 +1,14 @@
 package geoactivity.client.gui.screen.handler;
 
-import geoactivity.client.gui.screen.handler.slot.GAOutputSlot;
+import geoactivity.api.gui.handler.ScreenHandlerBase;
 import geoactivity.common.registry.GAScreenHandlerTypes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.slot.Slot;
 
-public class CoalRefinerScreenHandler extends GAScreenHandler {
+public class CoalRefinerScreenHandler extends ScreenHandlerBase {
 
     private final PropertyDelegate propertyDelegate;
 
@@ -24,11 +21,11 @@ public class CoalRefinerScreenHandler extends GAScreenHandler {
         this.propertyDelegate = propertyDelegate;
         this.addProperties(this.propertyDelegate);
         this.builder()
+                .playerSetup()
                 .slot(0, 31, 36)
                 .slot(1, 71, 36)
-                .output(2, 128, 36, always -> true)
-                .parent().drawPlayerSlots();
-
+                .output(2, 128, 36)
+                .build();
     }
 
     public int getCookProgress() {

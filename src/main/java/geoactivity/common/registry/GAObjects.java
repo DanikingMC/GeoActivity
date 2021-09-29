@@ -1,16 +1,13 @@
 package geoactivity.common.registry;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import geoactivity.common.GeoActivity;
 import geoactivity.common.block.CoalRefinerBlock;
 import geoactivity.common.block.GAOreBlock;
 import geoactivity.common.item.GACoalItem;
+import geoactivity.common.item.ReinforcedMinerItem;
 import geoactivity.common.item.util.GAAxeItem;
 import geoactivity.common.item.util.GAHoeItem;
 import geoactivity.common.item.util.GAPickaxeItem;
-import geoactivity.common.item.ReinforcedMinerItem;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
@@ -21,13 +18,16 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /*
  * Contains all the objects (items and blocks) of "GeoActivity".
  */
 public final class GAObjects {
     
     /*
-     * Done linked maps to mantain insertion order.
+     * Done linked maps to maintain insertion order.
      */
     private static final Map<Identifier, Item> ITEMS = new LinkedHashMap<>();
     private static final Map<Identifier, Block> BLOCKS = new LinkedHashMap<>();
@@ -47,7 +47,7 @@ public final class GAObjects {
     public static final Item REINFORCED_AXE = register("reinforced_axe", new GAAxeItem(GAMaterials.REINFORCED_TOOL, 5.0F, -3.1F, settings()));
     public static final Item REINFORCED_SHOVEL = register("reinforced_shovel", new ShovelItem(GAMaterials.REINFORCED_TOOL,1.5F, -3.0F,settings()));
     public static final Item REINFORCED_HOE = register("reinforced_hoe", new GAHoeItem(GAMaterials.REINFORCED_TOOL, -3, 0.0F, settings()));
-    public static final Item REINFORCED_MINER = register("reinforced_miner", new ReinforcedMinerItem(1.25F, -2.9F, GAMaterials.REINFORCED_TOOL, settings()));
+    public static final Item REINFORCED_MINER = register("reinforced_miner", new ReinforcedMinerItem(2.0F, -3.0F, GAMaterials.REINFORCED_TOOL, settings()));
     public static final Item REINFORCED_HELMET = register("reinforced_helmet", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.HEAD, settings()));
     public static final Item REINFORCED_CHESTPLATE = register("reinforced_chestplate", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.CHEST, settings()));
     public static final Item REINFORCED_LEGGINGS = register("reinforced_leggings", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.LEGS, settings()));

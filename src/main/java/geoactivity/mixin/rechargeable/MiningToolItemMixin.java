@@ -1,4 +1,4 @@
-package geoactivity.mixin;
+package geoactivity.mixin.rechargeable;
 
 import geoactivity.api.item.Rechargeable;
 import geoactivity.common.util.RechargeableHelper;

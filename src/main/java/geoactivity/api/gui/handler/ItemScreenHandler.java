@@ -1,6 +1,5 @@
-package geoactivity.api.screen;
+package geoactivity.api.gui.handler;
 
-import geoactivity.client.gui.screen.handler.ScreenHandlerBase;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;

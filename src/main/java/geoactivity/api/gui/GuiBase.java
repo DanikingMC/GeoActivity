@@ -1,6 +1,6 @@
-package geoactivity.client.gui.screen;
+package geoactivity.api.gui;
 
-import geoactivity.api.screen.builder.ScreenBuilder;
+import geoactivity.api.gui.handler.builder.ScreenBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.util.math.MatrixStack;

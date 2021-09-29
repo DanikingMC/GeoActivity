@@ -16,7 +16,7 @@ public class AttackBlockHandler implements AttackBlockCallback {
     public ActionResult interact(PlayerEntity player, World world, Hand hand, BlockPos pos, Direction direction) {
         final ItemStack stack = player.getStackInHand(hand);
         if (stack.getItem() instanceof Rechargeable) {
-            RechargeableHelper.tryToSetDestroyed(stack);
+            RechargeableHelper.initDestroyedNbt(player, stack);
             return ActionResult.PASS;
         }
         return ActionResult.PASS;

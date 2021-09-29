@@ -1,6 +1,6 @@
-package geoactivity.api.screen.builder;
+package geoactivity.api.gui.handler.builder;
 
-import geoactivity.client.gui.screen.handler.ScreenHandlerBase;
+import geoactivity.api.gui.handler.ScreenHandlerBase;
 import geoactivity.client.gui.screen.handler.slot.ChargeSlot;
 import geoactivity.client.gui.screen.handler.slot.GAOutputSlot;
 import geoactivity.client.gui.screen.handler.slot.GASlot;

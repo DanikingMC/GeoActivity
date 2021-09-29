@@ -1,11 +1,12 @@
 package geoactivity.client.gui.screen;
 
+import geoactivity.api.gui.GuiBase;
 import geoactivity.client.gui.screen.handler.ReinforcedMinerScreenHandler;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 
-public class ReinforcedMinerScreen extends GAHandledScreen<ReinforcedMinerScreenHandler> {
+public class ReinforcedMinerScreen extends GuiBase<ReinforcedMinerScreenHandler> {
 
     public ReinforcedMinerScreen(ReinforcedMinerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -14,5 +15,6 @@ public class ReinforcedMinerScreen extends GAHandledScreen<ReinforcedMinerScreen
     @Override
     protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
         super.drawBackground(matrices, delta, mouseX, mouseY);
+        this.builder().drawSlot(matrices, this.left() + 79, this.top() + 33);
     }
 }
