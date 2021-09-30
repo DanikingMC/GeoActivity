@@ -1,5 +1,6 @@
 package geoactivity.common.event.handler;
 
+import geoactivity.api.GeoActivityAPI;
 import geoactivity.api.item.Rechargeable;
 import geoactivity.common.util.GAInventory;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
@@ -29,14 +30,15 @@ public class UseItemHandler implements UseItemCallback {
                         public Text getDisplayName() {
                             return new TranslatableText(stack.getTranslationKey());
                         }
-
                         @Nullable
                         @Override
                         public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-                            return item.getGui(syncId, inv, new GAInventory());
+                            return item.getGui(syncId, inv, new GAInventory(stack, item.size()));
                         }
                     });
                     return new TypedActionResult<>((ActionResult.PASS), stack);
+                } else {
+                    GeoActivityAPI.charge(stack);
                 }
             }
         }

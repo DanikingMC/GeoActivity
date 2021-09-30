@@ -3,9 +3,9 @@ package geoactivity.common.registry;
 import geoactivity.common.GeoActivity;
 import geoactivity.common.block.CoalRefinerBlock;
 import geoactivity.common.block.GAOreBlock;
-import geoactivity.common.item.GACoalItem;
 import geoactivity.common.item.ReinforcedMinerItem;
 import geoactivity.common.item.util.GAAxeItem;
+import geoactivity.common.item.util.GAChargeItem;
 import geoactivity.common.item.util.GAHoeItem;
 import geoactivity.common.item.util.GAPickaxeItem;
 import net.minecraft.block.AbstractBlock;
@@ -32,9 +32,9 @@ public final class GAObjects {
     private static final Map<Identifier, Item> ITEMS = new LinkedHashMap<>();
     private static final Map<Identifier, Block> BLOCKS = new LinkedHashMap<>();
 
-    public static final Item LIGNITE_COAL = register("lignite_coal", new GACoalItem(settings()));
-    public static final Item BITUMINOUS_COAL = register("bituminous_coal", new GACoalItem(settings()));
-    public static final Item ANTHRACITE_COAL = register("anthracite_coal", new GACoalItem(settings()));
+    public static final Item LIGNITE_COAL = register("lignite_coal", new GAChargeItem(settings()));
+    public static final Item BITUMINOUS_COAL = register("bituminous_coal", new GAChargeItem(settings()));
+    public static final Item ANTHRACITE_COAL = register("anthracite_coal", new GAChargeItem(settings()));
     public static final Item GRAPHITE = register("graphite", new Item(settings()));
     public static final Item CARBON_FIBER = register("carbon_fiber", new Item(settings()));
     public static final Item CARBON_STICK = register("carbon_stick", new Item(settings()));

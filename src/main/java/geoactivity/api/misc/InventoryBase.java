@@ -6,9 +6,12 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 
+/**
+ * Basic Inventory implementation.
+ */
 public class InventoryBase implements Inventory {
 
-    private final DefaultedList<ItemStack> inventory;
+    protected final DefaultedList<ItemStack> inventory;
 
     public InventoryBase(final int size) {
         this.inventory = DefaultedList.ofSize(size, ItemStack.EMPTY);
@@ -32,18 +35,24 @@ public class InventoryBase implements Inventory {
     @Override
     public ItemStack removeStack(int slot, int amount) {
         final ItemStack stack = Inventories.splitStack(this.inventory, slot, amount);
-
-        return null;
+        if (!stack.isEmpty()) {
+            this.markDirty();
+        }
+        return stack;
     }
 
     @Override
     public ItemStack removeStack(int slot) {
-        return null;
+        return Inventories.removeStack(this.inventory, slot);
     }
 
     @Override
     public void setStack(int slot, ItemStack stack) {
-
+        this.inventory.set(slot, stack);
+        if (stack.getCount() > this.getMaxCountPerStack()) {
+            stack.setCount(this.getMaxCountPerStack());
+        }
+        this.markDirty();
     }
 
     @Override
@@ -58,6 +67,10 @@ public class InventoryBase implements Inventory {
 
     @Override
     public void clear() {
+        this.inventory.clear();
+    }
 
+    public DefaultedList<ItemStack> getInventory() {
+        return inventory;
     }
 }

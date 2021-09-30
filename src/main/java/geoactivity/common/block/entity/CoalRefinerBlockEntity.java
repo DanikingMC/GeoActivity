@@ -2,7 +2,7 @@ package geoactivity.common.block.entity;
 
 import geoactivity.client.gui.screen.handler.CoalRefinerScreenHandler;
 import geoactivity.common.block.CoalRefinerBlock;
-import geoactivity.common.item.GACoalItem;
+import geoactivity.common.item.util.GAChargeItem;
 import geoactivity.common.recipe.RefinementRecipe;
 import geoactivity.common.registry.GABlockEntityTypes;
 import geoactivity.common.registry.GAObjects;
@@ -227,7 +227,7 @@ public class CoalRefinerBlockEntity extends SmelterBlockEntity {
             return this.getItemBurnTime(stack) > 0;
         }
         if (slot == 1) {
-            return stack.getItem() instanceof GACoalItem || stack.getItem() == Items.COAL;
+            return stack.getItem() instanceof GAChargeItem || stack.getItem() == Items.COAL;
         }
         return false;
     }

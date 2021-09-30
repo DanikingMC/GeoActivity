@@ -1,52 +1,46 @@
 package geoactivity.common.util;
 
+import geoactivity.api.misc.InventoryBase;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 
-public class GAInventory implements Inventory {
-    @Override
-    public int size() {
-        return 0;
+public final class GAInventory extends InventoryBase {
+
+    private final ItemStack stack;
+
+    public GAInventory(final ItemStack stack, final int size) {
+        super(size);
+        this.stack = stack;
+        this.readNbt();
     }
 
     @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public ItemStack getStack(int slot) {
-        return null;
-    }
-
-    @Override
-    public ItemStack removeStack(int slot, int amount) {
-        return null;
-    }
-
-    @Override
-    public ItemStack removeStack(int slot) {
-        return null;
-    }
-
-    @Override
-    public void setStack(int slot, ItemStack stack) {
-
+    public void onClose(PlayerEntity player) {
+        super.onClose(player);
+        this.writeNbt();
     }
 
     @Override
     public void markDirty() {
+        super.markDirty();
+        this.writeNbt();
+    }
 
+    public void writeNbt() {
+        Inventories.writeNbt(this.stack.getOrCreateSubNbt("Items"), this.getInventory());
+    }
+
+    public void readNbt() {
+        Inventories.readNbt(this.stack.getOrCreateSubNbt("Items"), this.getInventory());
     }
 
     @Override
     public boolean canPlayerUse(PlayerEntity player) {
-        return false;
+        return !stack.isEmpty();
     }
 
-    @Override
-    public void clear() {
-
+    public static GAInventory create(final ItemStack stack, final int size) {
+        return new GAInventory(stack, size);
     }
 }

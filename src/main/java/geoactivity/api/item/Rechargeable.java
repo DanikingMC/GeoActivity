@@ -1,6 +1,7 @@
 package geoactivity.api.item;
 
 import com.google.common.collect.Multimap;
+import geoactivity.api.gui.handler.ItemScreenHandler;
 import geoactivity.common.item.util.GAMiningToolItem;
 import geoactivity.common.util.GAInventory;
 import geoactivity.common.util.RechargeableHelper;
@@ -10,7 +11,6 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ScreenHandler;
 
 import java.util.UUID;
 
@@ -35,7 +35,13 @@ public interface Rechargeable {
      * Gets the gui of the item.
      * @return ScreenHandler.
      */
-    ScreenHandler getGui(final int syncId, final PlayerInventory playerInventory, final GAInventory inventory);
+    ItemScreenHandler getGui(final int syncId, final PlayerInventory playerInventory, final GAInventory inventory);
+
+    /**
+     * Gets the size of the inventory.
+     * @return int.
+     */
+    int size();
 
     /**
      * Removes and puts back stack attributes modifier
