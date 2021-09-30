@@ -19,12 +19,12 @@ import java.util.List;
  */
 public abstract class ScreenHandlerBase extends ScreenHandler {
 
-    private final PlayerInventory playerInventory;
-    private final Inventory inventory;
+    protected final PlayerInventory playerInventory;
+    protected final Inventory inventory;
     protected final PlayerEntity player;
     protected final World world;
-    private final List<Range<Integer>> playerRanges;
-    private final List<Range<Integer>> containerRanges;
+    protected final List<Range<Integer>> playerRanges;
+    protected final List<Range<Integer>> containerRanges;
 
     protected ScreenHandlerBase(ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, Inventory inventory) {
         super(type, syncId);

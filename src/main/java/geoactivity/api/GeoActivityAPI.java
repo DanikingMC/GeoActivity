@@ -39,7 +39,7 @@ public class GeoActivityAPI {
                         }
                         if (container.getDamage() != damage) {
                             if (RechargeableHelper.isDestroyed(container)) {
-                                NbtHelper.putBool(container, Rechargeable.DESTROYED_NBT_KEY, false);
+                                NbtHelper.remove(container, Rechargeable.DESTROYED_NBT_KEY);
                             }
                         }
                     }

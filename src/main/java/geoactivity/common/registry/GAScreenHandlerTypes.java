@@ -1,5 +1,6 @@
 package geoactivity.common.registry;
 
+import geoactivity.client.gui.screen.handler.AutoStoneBuilderScreenHandler;
 import geoactivity.client.gui.screen.handler.CoalRefinerScreenHandler;
 import geoactivity.client.gui.screen.handler.ReinforcedMinerScreenHandler;
 import geoactivity.common.GeoActivity;
@@ -12,6 +13,7 @@ public final class GAScreenHandlerTypes {
 
     public static final ScreenHandlerType<CoalRefinerScreenHandler> COAL_REFINER = simple("coal_refiner", CoalRefinerScreenHandler::new);
     public static final ScreenHandlerType<ReinforcedMinerScreenHandler> REINFORCED_MINER = simple("reinforced_miner", ReinforcedMinerScreenHandler::new);
+    public static final ScreenHandlerType<AutoStoneBuilderScreenHandler> AUTO_STONE_BUILDER = simple("auto_stone_builder", AutoStoneBuilderScreenHandler::new);
 
         public static <T extends ScreenHandler> ScreenHandlerType<T> simple(final String name, final ScreenHandlerRegistry.SimpleClientHandlerFactory<T> factory) {
         return ScreenHandlerRegistry.registerSimple(new Identifier(GeoActivity.MODID, name), factory);

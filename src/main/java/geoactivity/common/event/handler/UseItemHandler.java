@@ -36,12 +36,11 @@ public class UseItemHandler implements UseItemCallback {
                             return item.getGui(syncId, inv, new GAInventory(stack, item.size()));
                         }
                     });
-                    return new TypedActionResult<>((ActionResult.PASS), stack);
                 } else {
                     GeoActivityAPI.charge(stack);
                 }
             }
         }
-        return new TypedActionResult<>((ActionResult.PASS), stack);
+        return new TypedActionResult<>(ActionResult.PASS, stack);
     }
 }

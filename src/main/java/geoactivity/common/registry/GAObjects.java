@@ -3,6 +3,7 @@ package geoactivity.common.registry;
 import geoactivity.common.GeoActivity;
 import geoactivity.common.block.CoalRefinerBlock;
 import geoactivity.common.block.GAOreBlock;
+import geoactivity.common.item.AutoStoneBuilderItem;
 import geoactivity.common.item.ReinforcedMinerItem;
 import geoactivity.common.item.util.GAAxeItem;
 import geoactivity.common.item.util.GAChargeItem;
@@ -42,6 +43,7 @@ public final class GAObjects {
     public static final Block BITUMINOUS_ORE = register("bituminous_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(2, 5)));
     //reinforced
     public static final Block ANTHRACITE_ORE = register("anthracite_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(3, 7)));
+    public static final Item AUTO_STONE_BUILDER = register("auto_stone_builder", new AutoStoneBuilderItem(settings().maxDamage(1000)));
     public static final Item REINFORCED_SWORD = register("reinforced_sword", new SwordItem(GAMaterials.REINFORCED_TOOL, 3, -2.4F,settings()));
     public static final Item REINFORCED_PICKAXE = register("reinforced_pickaxe", new GAPickaxeItem(GAMaterials.REINFORCED_TOOL, 1, -2.8F,settings()));
     public static final Item REINFORCED_AXE = register("reinforced_axe", new GAAxeItem(GAMaterials.REINFORCED_TOOL, 5.0F, -3.1F, settings()));

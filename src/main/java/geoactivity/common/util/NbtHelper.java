@@ -10,6 +10,10 @@ public class NbtHelper {
         stack.getOrCreateNbt().putBoolean(key, bool);
     }
 
+    public static void remove(final ItemStack stack, final String key) {
+        stack.getOrCreateNbt().remove(key);
+    }
+
     public static boolean getBool(final ItemStack stack, final String key) {
         return checkNbt(stack, key) && stack.getOrCreateNbt().getBoolean(key);
     }

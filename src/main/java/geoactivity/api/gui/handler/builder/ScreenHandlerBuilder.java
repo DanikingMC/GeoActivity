@@ -1,6 +1,7 @@
 package geoactivity.api.gui.handler.builder;
 
 import geoactivity.api.gui.handler.ScreenHandlerBase;
+import geoactivity.api.item.Rechargeable;
 import geoactivity.client.gui.screen.handler.slot.ChargeSlot;
 import geoactivity.client.gui.screen.handler.slot.GAOutputSlot;
 import geoactivity.client.gui.screen.handler.slot.GASlot;
@@ -30,6 +31,7 @@ public final class ScreenHandlerBuilder {
 
     public ScreenHandlerBuilder slot(final int index, final int posX, final int posY) {
         return this.slot(index, posX, posY, always -> true);
+
     }
     public ScreenHandlerBuilder slot(final int index, final int posX, final int posY, final Predicate<ItemStack> canInsert) {
         this.parent.addSlot(new GASlot(this.inventory, index, posX, posY, canInsert));
@@ -39,8 +41,8 @@ public final class ScreenHandlerBuilder {
         this.parent.addSlot(new GAOutputSlot(this.player, this.inventory, index, posX, posY));
         return this;
     }
-    public ScreenHandlerBuilder charge(final int index, final int posX, final int posY) {
-        this.parent.addSlot(new ChargeSlot(this.inventory, index, posX, posY));
+    public ScreenHandlerBuilder charge(final int posX, final int posY) {
+        this.parent.addSlot(new ChargeSlot(this.inventory, Rechargeable.CHARGE_SLOT_INDEX, posX, posY));
         return this;
     }
     public ScreenHandlerBuilder playerSetup() {

@@ -11,8 +11,8 @@ import net.minecraft.screen.PropertyDelegate;
 public class CoalRefinerScreenHandler extends ScreenHandlerBase {
 
     private final PropertyDelegate propertyDelegate;
-
     public CoalRefinerScreenHandler(int syncId, PlayerInventory playerInventory) {
+
         this(syncId, playerInventory, new SimpleInventory(3), new ArrayPropertyDelegate(4));
     }
 
