@@ -55,7 +55,7 @@ public class ConversionCategory implements DisplayCategory<ConversionDisplay> {
         final List<Widget> widgets = new ArrayList<>();
         widgets.add(Widgets.createRecipeBase(bounds));
         final Text key = new TranslatableText(display.getBuilderItem().getTranslationKey());
-        final Text tooltip = new TranslatableText("rei.geoactivity.tooltip.builder", display.getBuilderItem().getTranslationKey());
+        final Text tooltip = new TranslatableText("rei.geoactivity.tooltip.builder", new TranslatableText(key.getString()));
         widgets.add(Widgets.createLabel(new Point(startPoint.getX() + 66, startPoint.getY() - 10), key)
                 .noShadow()
                 .tooltipLine(tooltip.getString())

@@ -4,6 +4,10 @@
         "geoactivity:lignite_ore",
         "geoactivity:bituminous_ore",
         "geoactivity:anthracite_ore",
-        "geoactivity:coal_refiner"
+        "geoactivity:hardened_glass",
+        "geoactivity:graphite_base",
+        "geoactivity:hardened_brick",
+        "geoactivity:coal_refiner",
+        "geoactivity:crafting_machine"
     ]
 }

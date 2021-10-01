@@ -63,6 +63,9 @@ public abstract class BuilderItem extends Item implements Rechargeable{
         if (inputStack.isEmpty() || outputStack.isEmpty()) {
             return false;
         }
+        if (inputStack.getItem() == outputStack.getItem()) {
+            return false;
+        }
         return !RechargeableHelper.isDestroyed(container);
     }
 

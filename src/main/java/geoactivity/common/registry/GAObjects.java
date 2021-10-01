@@ -2,16 +2,12 @@ package geoactivity.common.registry;
 
 import geoactivity.common.GeoActivity;
 import geoactivity.common.block.CoalRefinerBlock;
+import geoactivity.common.block.CraftingMachineBlock;
 import geoactivity.common.block.GAOreBlock;
 import geoactivity.common.item.AutoStoneBuilderItem;
 import geoactivity.common.item.ReinforcedMinerItem;
-import geoactivity.common.item.util.GAAxeItem;
-import geoactivity.common.item.util.GAChargeItem;
-import geoactivity.common.item.util.GAHoeItem;
-import geoactivity.common.item.util.GAPickaxeItem;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Material;
+import geoactivity.common.item.util.*;
+import net.minecraft.block.*;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.sound.BlockSoundGroup;
@@ -41,8 +37,12 @@ public final class GAObjects {
     public static final Item CARBON_STICK = register("carbon_stick", new Item(settings()));
     public static final Block LIGNITE_ORE = register("lignite_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(1, 3)));
     public static final Block BITUMINOUS_ORE = register("bituminous_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(2, 5)));
-    //reinforced
     public static final Block ANTHRACITE_ORE = register("anthracite_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(3, 7)));
+    //misc
+    public static final Block HARDENED_GLASS = register("hardened_glass", new GlassBlock(settings(Material.GLASS, 20.0F, 130.0F).requiresTool().nonOpaque()));
+    public static final Block GRAPHITE_BASE = register("graphite_base", new GATransparentBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool().nonOpaque()));
+    public static final Block HARDENED_BRICK = register("hardened_brick", new Block(settings(Material.STONE, 20.0F, 150.0F).requiresTool()));
+    //reinforced
     public static final Item AUTO_STONE_BUILDER = register("auto_stone_builder", new AutoStoneBuilderItem(settings().maxDamage(1000)));
     public static final Item REINFORCED_SWORD = register("reinforced_sword", new SwordItem(GAMaterials.REINFORCED_TOOL, 3, -2.4F,settings()));
     public static final Item REINFORCED_PICKAXE = register("reinforced_pickaxe", new GAPickaxeItem(GAMaterials.REINFORCED_TOOL, 1, -2.8F,settings()));
@@ -56,6 +56,7 @@ public final class GAObjects {
     public static final Item REINFORCED_BOOTS = register("reinforced_boots", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.FEET, settings()));
     //machines
     public static final Block COAL_REFINER = register("coal_refiner", new CoalRefinerBlock(settings(Material.METAL, 3.5F, 15.0F).requiresTool().sounds(BlockSoundGroup.STONE).luminance(state -> state.get(CoalRefinerBlock.LIT) ? 13: 0)));
+    public static final Block CRAFTING_MACHINE = register("crafting_machine", new CraftingMachineBlock(settings(Material.METAL, 3.0F, 15.0F).requiresTool().sounds(BlockSoundGroup.STONE)));
 
     /**
      * Inserts the item (value) into the map which its identifier (key).

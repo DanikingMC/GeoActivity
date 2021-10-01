@@ -3,6 +3,9 @@
     "values": [
         "geoactivity:lignite_ore",
         "geoactivity:bituminous_ore",
-        "geoactivity:coal_refiner"
+        "geoactivity:hardened_glass",
+        "geoactivity:graphite_base",
+        "geoactivity:coal_refiner",
+        "geoactivity:crafting_machine"
     ]
 }
