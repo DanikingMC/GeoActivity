@@ -24,5 +24,8 @@
     "geoactivity.tooltip.destroyed": "Destroyed",
     "geoactivity.tooltip.shift": "Shift",
     "geoactivity.tooltip.more_info": "Hold %s for more info",
-    "rei.geoactivity.refinement": "Refinement"
+    "geoactivity.tooltip.blocks": "Blocks: %s",
+    "rei.geoactivity.refinement": "Refinement",
+    "rei.geoactivity.conversion": "Conversion",
+    "rei.geoactivity.tooltip.builder": "Builder: %s"
 }
