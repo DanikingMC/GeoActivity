@@ -2,6 +2,7 @@ package geoactivity.client;
 
 import geoactivity.client.gui.screen.AutoStoneBuilderScreen;
 import geoactivity.client.gui.screen.CoalRefinerScreen;
+import geoactivity.client.gui.screen.CraftingMachineScreen;
 import geoactivity.client.gui.screen.ReinforcedMinerScreen;
 import geoactivity.common.event.handler.ItemTooltipHandler;
 import geoactivity.common.registry.GAObjects;
@@ -21,6 +22,6 @@ public class GeoActivityClient implements ClientModInitializer {
         ScreenRegistry.register(GAScreenHandlerTypes.COAL_REFINER, CoalRefinerScreen::new);
         ScreenRegistry.register(GAScreenHandlerTypes.REINFORCED_MINER, ReinforcedMinerScreen::new);
         ScreenRegistry.register(GAScreenHandlerTypes.AUTO_STONE_BUILDER, AutoStoneBuilderScreen::new);
-
+        ScreenRegistry.register(GAScreenHandlerTypes.CRAFTING_MACHINE, CraftingMachineScreen::new);
     }
 }

@@ -7,8 +7,11 @@ import geoactivity.client.gui.screen.handler.slot.GAOutputSlot;
 import geoactivity.client.gui.screen.handler.slot.GASlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.slot.CraftingResultSlot;
 import net.minecraft.screen.slot.Slot;
 import org.apache.commons.lang3.Range;
 
@@ -31,23 +34,45 @@ public final class ScreenHandlerBuilder {
 
     public ScreenHandlerBuilder slot(final int index, final int posX, final int posY) {
         return this.slot(index, posX, posY, always -> true);
-
     }
+
     public ScreenHandlerBuilder slot(final int index, final int posX, final int posY, final Predicate<ItemStack> canInsert) {
         this.parent.addSlot(new GASlot(this.inventory, index, posX, posY, canInsert));
         return this;
     }
+
     public ScreenHandlerBuilder output(final int index, final int posX, final int posY) {
         this.parent.addSlot(new GAOutputSlot(this.player, this.inventory, index, posX, posY));
         return this;
     }
+
+    public ScreenHandlerBuilder craftingOutput(final CraftingInventory craftingInventory, final CraftingResultInventory resultInventory, final int index, final int posX, final int posY) {
+        this.parent.addSlot(new CraftingResultSlot(this.player, craftingInventory, resultInventory, index, posX, posY));
+        return this;
+    }
+
     public ScreenHandlerBuilder charge(final int posX, final int posY) {
         this.parent.addSlot(new ChargeSlot(this.inventory, Rechargeable.CHARGE_SLOT_INDEX, posX, posY));
         return this;
     }
+
+    public ScreenHandlerBuilder container3x3(final Inventory inventory) {
+        return this.container3x3(inventory, 30, 17);
+    }
+
+    public ScreenHandlerBuilder container3x3(final Inventory inventory, final int posX, final int posY) {
+        for (int x = 0; x < 3; ++x) {
+            for (int y = 0; y < 3; ++y) {
+                this.parent.addSlot(new Slot(inventory, y + x * 3, posX + y * 18, posY + x * 18));
+            }
+        }
+        return this;
+    }
+
     public ScreenHandlerBuilder playerSetup() {
         return this.playerSetup(8, 84);
     }
+
     public ScreenHandlerBuilder playerSetup(int posX, int posY) {
         final int i = this.parent.slots.size();
         for (int j = 0; j < 3; ++j) {

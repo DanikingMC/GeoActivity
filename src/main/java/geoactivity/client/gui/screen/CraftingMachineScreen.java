@@ -1,0 +1,33 @@
+package geoactivity.client.gui.screen;
+
+import geoactivity.api.gui.GuiBase;
+import geoactivity.client.gui.screen.handler.CraftingMachineScreenHandler;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.text.Text;
+
+public class CraftingMachineScreen extends GuiBase<CraftingMachineScreenHandler> {
+
+    public CraftingMachineScreen(CraftingMachineScreenHandler handler, PlayerInventory inventory, Text title) {
+        super(handler, inventory, title);
+    }
+
+    @Override
+    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+        super.drawBackground(matrices, delta, mouseX, mouseY);
+        this.builder().drawContainer3x3(matrices, this.left() + 8, this.top() + 16);
+        this.builder().drawSlot(matrices, this.left() + 70, this.top() + 52);
+        this.builder().drawSlot(matrices, this.left() + 110, this.top() + 52);
+        this.builder().drawSlot(matrices, this.left() + 90, this.top() + 16);
+        this.builder().drawOutputSlot(matrices, this.left() + 142, this.top() + 30);
+        this.builder().drawBurningProgress(matrices, false, 0, this.left() + 92, this.top() + 54, mouseX, mouseY);
+        this.builder().drawBigProgressBar(matrices, this.left() + 64, this.top() + 36, 0, mouseX, mouseY);
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        this.titleY = 6;
+        this.titleX = 8;
+    }
+}

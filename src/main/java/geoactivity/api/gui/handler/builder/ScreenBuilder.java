@@ -24,17 +24,26 @@ public final class ScreenBuilder {
         this.parent.drawTexture(stack, left + width / 2, top + height / 2, 150 - width / 2, 150 - height / 2, width / 2, height / 2);
     }
 
-    public void drawPlayerSlots(final MatrixStack matrixStack, final int left, final int top) {
+    public void drawContainer3x3(final MatrixStack matrixStack, final int posX, final int posY) {
+        this.bindTexture();
+        for (int x = 0; x < 3; ++x) {
+            for (int y = 0; y < 3; ++y) {
+                this.parent.drawTexture(matrixStack, posX + y * 18, posY + x * 18, 238, 0, 18, 18);
+            }
+        }
+    }
+
+    public void drawPlayerSlots(final MatrixStack matrixStack, final int posX, final int posY) {
         this.bindTexture();
 
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 9; y++) {
-                this.parent.drawTexture(matrixStack, left + y * 18, top + x * 18, 238, 0, 18, 18);
+                this.parent.drawTexture(matrixStack, posX + y * 18, posY + x * 18, 238, 0, 18, 18);
             }
         }
         final int offsetY = 58;
         for (int x = 0; x < 9; x++) {
-            this.parent.drawTexture(matrixStack, left + x * 18, top + offsetY, 238, 0, 18, 18);
+            this.parent.drawTexture(matrixStack, posX + x * 18, posY + offsetY, 238, 0, 18, 18);
         }
     }
 
@@ -51,6 +60,15 @@ public final class ScreenBuilder {
     public void drawProgress(MatrixStack matrixStack, int posX, int posY, int progress, int mouseX, int mouseY) {
         this.bindTexture();
         this.parent.drawTexture(matrixStack, posX, posY, 150, 26, 22, 15);
+        if (progress > 0) {
+            //placed on top
+            this.parent.drawTexture(matrixStack, posX, posY, 150, 41, progress + 1, 16);
+        }
+    }
+
+    public void drawBigProgressBar(MatrixStack matrixStack, int posX, int posY, int progress, int mouseX, int mouseY) {
+        this.bindTexture();
+        this.parent.drawTexture(matrixStack, posX, posY, 150, 58, 76, 15);
         if (progress > 0) {
             //placed on top
             this.parent.drawTexture(matrixStack, posX, posY, 150, 41, progress + 1, 16);

@@ -2,6 +2,7 @@ package geoactivity.common.registry;
 
 import geoactivity.client.gui.screen.handler.AutoStoneBuilderScreenHandler;
 import geoactivity.client.gui.screen.handler.CoalRefinerScreenHandler;
+import geoactivity.client.gui.screen.handler.CraftingMachineScreenHandler;
 import geoactivity.client.gui.screen.handler.ReinforcedMinerScreenHandler;
 import geoactivity.common.GeoActivity;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
@@ -12,6 +13,7 @@ import net.minecraft.util.Identifier;
 public final class GAScreenHandlerTypes {
 
     public static final ScreenHandlerType<CoalRefinerScreenHandler> COAL_REFINER = simple("coal_refiner", CoalRefinerScreenHandler::new);
+    public static final ScreenHandlerType<CraftingMachineScreenHandler> CRAFTING_MACHINE = simple("crafting_machine", CraftingMachineScreenHandler::new);
     public static final ScreenHandlerType<ReinforcedMinerScreenHandler> REINFORCED_MINER = simple("reinforced_miner", ReinforcedMinerScreenHandler::new);
     public static final ScreenHandlerType<AutoStoneBuilderScreenHandler> AUTO_STONE_BUILDER = simple("auto_stone_builder", AutoStoneBuilderScreenHandler::new);
 
