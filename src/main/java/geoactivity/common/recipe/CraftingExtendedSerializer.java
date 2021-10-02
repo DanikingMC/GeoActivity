@@ -12,7 +12,7 @@ import net.minecraft.util.collection.DefaultedList;
 
 import java.util.Map;
 
-public final class CraftingExtendedSerializer implements RecipeSerializer<ShapedRecipe> {
+public class CraftingExtendedSerializer implements RecipeSerializer<ShapedRecipe> {
 
     public ShapedRecipe read(Identifier id, JsonObject json) {
         Map<String, Ingredient> map = RecipeUtil.readJsonSymbols((JsonHelper.getObject(json, "key")));

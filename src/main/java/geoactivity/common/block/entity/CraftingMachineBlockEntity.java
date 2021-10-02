@@ -18,6 +18,8 @@ public class CraftingMachineBlockEntity extends GABlockEntityBase {
     private final PropertyDelegate propertyDelegate;
 
     public CraftingMachineBlockEntity(BlockPos pos, BlockState state) {
+
+
         super(GABlockEntityTypes.CRAFTING_MACHINE, 3, pos, state);
         this.propertyDelegate = new PropertyDelegate() {
             @Override

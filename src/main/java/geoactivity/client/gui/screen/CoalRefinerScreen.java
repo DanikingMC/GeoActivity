@@ -2,10 +2,13 @@ package geoactivity.client.gui.screen;
 
 import geoactivity.api.gui.GuiBase;
 import geoactivity.client.gui.screen.handler.CoalRefinerScreenHandler;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 
+@Environment(EnvType.CLIENT)
 public class CoalRefinerScreen extends GuiBase<CoalRefinerScreenHandler> {
 
     public CoalRefinerScreen(CoalRefinerScreenHandler handler, PlayerInventory inventory, Text title) {

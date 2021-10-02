@@ -3,9 +3,14 @@ package geoactivity.common.registry;
 import geoactivity.common.GeoActivity;
 import geoactivity.common.recipe.ConversionRecipe;
 import geoactivity.common.recipe.CraftingExtendedSerializer;
-import geoactivity.api.recipe.IMachineRecipe;
+import geoactivity.common.recipe.crafting.CraftingMachineShapedRecipe;
 import geoactivity.common.recipe.RefinementRecipe;
-import net.minecraft.recipe.*;
+import geoactivity.common.recipe.crafting.CraftingMachineShapelessRecipe;
+import geoactivity.common.recipe.crafting.IMachineRecipe;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -19,10 +24,10 @@ public class GARecipeTypes {
 
     public static final RecipeSerializer<RefinementRecipe> REFINEMENT_RECIPE_SERIALIZER = create("refinement", new  RefinementRecipe.Serializer());
     public static final RecipeType<RefinementRecipe> REFINEMENT_RECIPE_TYPE = create("refinement");
-
     public static final RecipeSerializer<ShapedRecipe> CRAFTING_EXTENDED_RECIPE_SERIALIZER = create("crafting_extended", new CraftingExtendedSerializer());
-    public static final RecipeType<IMachineRecipe> MACHINE_CRAFTING_RECIPE = create("machine_crafting");
-
+    public static final RecipeSerializer<CraftingMachineShapedRecipe> CRAFTING_MACHINE_SHAPED_RECIPE_SERIALIZER = create("crafting_machine_shaped", new CraftingMachineShapedRecipe.Serializer());
+    public static final RecipeSerializer<CraftingMachineShapelessRecipe> CRAFTING_MACHINE_SHAPELESS_RECIPE_SERIALIZER = create("crafting_machine_shapeless", new CraftingMachineShapelessRecipe.Serializer());
+    public static final RecipeType<IMachineRecipe> MACHINE_CRAFTING_RECIPE = create("crafting_machine");
     public static final RecipeType<ConversionRecipe> CONVERSION_RECIPE_TYPE = create("conversion");
     public static final RecipeSerializer<ConversionRecipe> CONVERSION_RECIPE_SERIALIZER = create("conversion", new ConversionRecipe.Serializer());
 

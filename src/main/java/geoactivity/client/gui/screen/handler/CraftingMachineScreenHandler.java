@@ -1,7 +1,7 @@
 package geoactivity.client.gui.screen.handler;
 
 import geoactivity.api.gui.handler.ScreenHandlerBase;
-import geoactivity.api.recipe.IMachineRecipe;
+import geoactivity.common.recipe.crafting.IMachineRecipe;
 import geoactivity.common.registry.GARecipeTypes;
 import geoactivity.common.registry.GAScreenHandlerTypes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,10 +11,9 @@ import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.world.World;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -22,7 +21,7 @@ import java.util.Optional;
 public class CraftingMachineScreenHandler extends ScreenHandlerBase {
 
     private final CraftingInventory craftingInventory;
-    private final CraftingResultInventory craftingOutputSlot;
+    private final CraftingResultInventory craftingResultInventory;
     private final ScreenHandlerContext context;
 
     public CraftingMachineScreenHandler(int syncId, PlayerInventory playerInventory) {
@@ -32,7 +31,7 @@ public class CraftingMachineScreenHandler extends ScreenHandlerBase {
     public CraftingMachineScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, final ScreenHandlerContext context) {
         super(GAScreenHandlerTypes.CRAFTING_MACHINE, syncId, playerInventory, inventory);
         this.craftingInventory = new CraftingInventory(this, 3, 3);
-        this.craftingOutputSlot = new CraftingResultInventory();
+        this.craftingResultInventory = new CraftingResultInventory();
         this.context = context;
         this.builder()
                 .playerSetup()
@@ -40,7 +39,7 @@ public class CraftingMachineScreenHandler extends ScreenHandlerBase {
                 .slot(0, 71, 53)
                 .slot(1, 111, 53)
                 .slot(2, 91, 17)
-                .craftingOutput(craftingInventory, this.craftingOutputSlot, 0, 147,35)
+                .craftingOutput(this.craftingInventory, this.craftingResultInventory, 0, 147,35)
                 .build();
     }
 
@@ -51,29 +50,31 @@ public class CraftingMachineScreenHandler extends ScreenHandlerBase {
     }
 
     @Override
-    public ItemStack transferSlot(PlayerEntity player, int index) {
-        ItemStack slotStackCopy = ItemStack.EMPTY;
-        Slot slot = this.getSlot(index);
-        if (slot != null && slot.hasStack()) {
-            ItemStack stackInSlot = slot.getStack();
-            slotStackCopy = stackInSlot.copy();
+    public void onContentChanged(Inventory inventory) {
+        this.context.run((contextWorld, pos)-> craftRecipe(this, this.craftingInventory, this.craftingResultInventory));
+    }
 
-        }
+    @Override
+    public ItemStack transferSlot(PlayerEntity player, int index) {
         return super.transferSlot(player, index);
     }
 
-    private static void checkContainer3x3Recipe(final World world, final PlayerEntity player) {
-        if (world.isClient) {
-            return;
+    private static void craftRecipe(final ScreenHandlerBase handler, final CraftingInventory inventory, final CraftingResultInventory resultInventory) {
+        if (!handler.getWorld().isClient) {
+            ItemStack output = ItemStack.EMPTY;
+            Objects.requireNonNull(handler.getWorld().getServer());
+            Optional<IMachineRecipe> optional = handler.getWorld()
+                    .getServer()
+                    .getRecipeManager()
+                    .getFirstMatch(GARecipeTypes.MACHINE_CRAFTING_RECIPE, inventory, handler.getWorld());
+            if (optional.isPresent()) {
+                IMachineRecipe craftingRecipe = optional.get();
+                output = craftingRecipe.craft(inventory);
+            }
+            resultInventory.setStack(0, output);
+            final int i = handler.getSlotIndex(resultInventory, 0).orElseThrow();
+            handler.setPreviousTrackedSlot(i, output);
+            ((ServerPlayerEntity)handler.getPlayer()).networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(handler.syncId, handler.nextRevision(), i, output));
         }
-       final ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-        Optional<IMachineRecipe> recipe = Objects.requireNonNull(world.getServer())
-                .getRecipeManager()
-                .listAllOfType(GARecipeTypes.MACHINE_CRAFTING_RECIPE)
-                .stream()
-                .findFirst();
-       // Optional<CraftingRecipe> optional = world.getServer().getRecipeManager().getFirstMatch(RecipeType.CRAFTING, craftingInventory, world);
-
-
     }
 }

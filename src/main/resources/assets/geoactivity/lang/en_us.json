@@ -31,5 +31,6 @@
     "geoactivity.tooltip.blocks": "Blocks: %s",
     "rei.geoactivity.refinement": "Refinement",
     "rei.geoactivity.conversion": "Conversion",
+    "rei.geoactivity.crafting_machine": "Crafting Machine Recipes",
     "rei.geoactivity.tooltip.builder": "Builder: %s"
 }

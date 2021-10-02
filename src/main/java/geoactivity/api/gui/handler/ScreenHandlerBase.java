@@ -171,4 +171,11 @@ public abstract class ScreenHandlerBase extends ScreenHandler {
         return playerInventory;
     }
 
+    public World getWorld() {
+        return world;
+    }
+
+    public PlayerEntity getPlayer() {
+        return player;
+    }
 }

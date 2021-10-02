@@ -8,11 +8,14 @@ import geoactivity.common.event.handler.ItemTooltipHandler;
 import geoactivity.common.registry.GAObjects;
 import geoactivity.common.registry.GAScreenHandlerTypes;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.minecraft.client.render.RenderLayer;
 
+@Environment(EnvType.CLIENT)
 public class GeoActivityClient implements ClientModInitializer {
 
     @Override

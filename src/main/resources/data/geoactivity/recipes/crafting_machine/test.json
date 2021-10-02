@@ -1,0 +1,17 @@
+{
+  "type": "geoactivity:crafting_machine_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:gravel"
+    },
+    {
+      "item": "minecraft:smooth_sandstone"
+    },
+    {
+      "item": "minecraft:diamond_block"
+    }
+  ],
+  "result": {
+    "item": "minecraft:diamond"
+  }
+}
