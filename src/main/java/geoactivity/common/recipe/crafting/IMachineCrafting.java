@@ -5,7 +5,7 @@ import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeType;
 
-public interface IMachineRecipe extends Recipe<CraftingInventory> {
+public interface IMachineCrafting extends Recipe<CraftingInventory> {
 
     @Override
     default RecipeType<?> getType() {

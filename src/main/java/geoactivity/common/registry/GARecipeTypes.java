@@ -6,7 +6,8 @@ import geoactivity.common.recipe.CraftingExtendedSerializer;
 import geoactivity.common.recipe.crafting.CraftingMachineShapedRecipe;
 import geoactivity.common.recipe.RefinementRecipe;
 import geoactivity.common.recipe.crafting.CraftingMachineShapelessRecipe;
-import geoactivity.common.recipe.crafting.IMachineRecipe;
+import geoactivity.common.recipe.crafting.CraftingMachineSmeltingRecipe;
+import geoactivity.common.recipe.crafting.IMachineCrafting;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
@@ -27,7 +28,9 @@ public class GARecipeTypes {
     public static final RecipeSerializer<ShapedRecipe> CRAFTING_EXTENDED_RECIPE_SERIALIZER = create("crafting_extended", new CraftingExtendedSerializer());
     public static final RecipeSerializer<CraftingMachineShapedRecipe> CRAFTING_MACHINE_SHAPED_RECIPE_SERIALIZER = create("crafting_machine_shaped", new CraftingMachineShapedRecipe.Serializer());
     public static final RecipeSerializer<CraftingMachineShapelessRecipe> CRAFTING_MACHINE_SHAPELESS_RECIPE_SERIALIZER = create("crafting_machine_shapeless", new CraftingMachineShapelessRecipe.Serializer());
-    public static final RecipeType<IMachineRecipe> MACHINE_CRAFTING_RECIPE = create("crafting_machine");
+    public static final RecipeType<IMachineCrafting> MACHINE_CRAFTING_RECIPE = create("crafting_machine");
+    public static final RecipeSerializer<CraftingMachineSmeltingRecipe> CRAFTING_MACHINE_SMELTING_RECIPE_SERIALIZER = create("crafting_machine_smelting", new CraftingMachineSmeltingRecipe.Serializer());
+    public static final RecipeType<CraftingMachineSmeltingRecipe> CRAFTING_MACHINE_SMELTING_RECIPE_TYPE = create("crating_machine_smelting");
     public static final RecipeType<ConversionRecipe> CONVERSION_RECIPE_TYPE = create("conversion");
     public static final RecipeSerializer<ConversionRecipe> CONVERSION_RECIPE_SERIALIZER = create("conversion", new ConversionRecipe.Serializer());
 

@@ -71,7 +71,7 @@ public final class ScreenBuilder {
         this.parent.drawTexture(matrixStack, posX, posY, 150, 58, 76, 15);
         if (progress > 0) {
             //placed on top
-            this.parent.drawTexture(matrixStack, posX, posY, 150, 41, progress + 1, 16);
+            this.parent.drawTexture(matrixStack, posX, posY, 150, 73, progress + 1, 16);
         }
     }
 

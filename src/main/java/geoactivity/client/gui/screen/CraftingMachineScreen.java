@@ -23,8 +23,8 @@ public class CraftingMachineScreen extends GuiBase<CraftingMachineScreenHandler>
         this.builder().drawSlot(matrices, this.left() + 110, this.top() + 52);
         this.builder().drawSlot(matrices, this.left() + 90, this.top() + 16);
         this.builder().drawOutputSlot(matrices, this.left() + 142, this.top() + 30);
-        this.builder().drawBurningProgress(matrices, false, 0, this.left() + 92, this.top() + 54, mouseX, mouseY);
-        this.builder().drawBigProgressBar(matrices, this.left() + 64, this.top() + 36, 0, mouseX, mouseY);
+        this.builder().drawBurningProgress(matrices, handler.isBurning(), handler.getFuelProgress(), this.left() + 92, this.top() + 54, mouseX, mouseY);
+        this.builder().drawBigProgressBar(matrices, this.left() + 64, this.top() + 36, handler.getCookProgress(), mouseX, mouseY);
     }
 
     @Override

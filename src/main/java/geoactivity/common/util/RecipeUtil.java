@@ -54,7 +54,7 @@ public class RecipeUtil {
         return map;
     }
 
-    public static String[] getCleanPattern(final JsonArray array) {
+    public static String[] getCleanedPattern(final JsonArray array) {
         return removePadding(readJsonPattern(array));
     }
 

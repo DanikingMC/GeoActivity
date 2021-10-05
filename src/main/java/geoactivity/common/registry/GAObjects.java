@@ -6,12 +6,21 @@ import geoactivity.common.block.CraftingMachineBlock;
 import geoactivity.common.block.GAOreBlock;
 import geoactivity.common.item.AutoStoneBuilderItem;
 import geoactivity.common.item.ReinforcedMinerItem;
+import geoactivity.common.item.advanced.AdvancedAxeItem;
+import geoactivity.common.item.advanced.AdvancedPickaxeItem;
+import geoactivity.common.item.advanced.AdvancedShovelItem;
+import geoactivity.common.item.advanced.AdvancedSwordItem;
+import geoactivity.common.item.advanced.armor.AdvancedArmorItem;
 import geoactivity.common.item.util.*;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.GlassBlock;
+import net.minecraft.block.Material;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.Registry;
 
@@ -35,6 +44,9 @@ public final class GAObjects {
     public static final Item GRAPHITE = register("graphite", new Item(settings()));
     public static final Item CARBON_FIBER = register("carbon_fiber", new Item(settings()));
     public static final Item CARBON_STICK = register("carbon_stick", new Item(settings()));
+    public static final Item SMALL_PRECIOUS_ALLOY_INGOT = register("small_precious_alloy_ingot", new Item(settings().rarity(Rarity.UNCOMMON)));
+    //perks
+
     public static final Block LIGNITE_ORE = register("lignite_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(1, 3)));
     public static final Block BITUMINOUS_ORE = register("bituminous_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(2, 5)));
     public static final Block ANTHRACITE_ORE = register("anthracite_ore", new GAOreBlock(settings(Material.STONE, 3.0F, 15.0F).requiresTool(), UniformIntProvider.create(3, 7)));
@@ -50,10 +62,19 @@ public final class GAObjects {
     public static final Item REINFORCED_SHOVEL = register("reinforced_shovel", new ShovelItem(GAMaterials.REINFORCED_TOOL,1.5F, -3.0F,settings()));
     public static final Item REINFORCED_HOE = register("reinforced_hoe", new GAHoeItem(GAMaterials.REINFORCED_TOOL, -3, 0.0F, settings()));
     public static final Item REINFORCED_MINER = register("reinforced_miner", new ReinforcedMinerItem(2.0F, -3.0F, GAMaterials.REINFORCED_TOOL, settings()));
+    public static final Item ADVANCED_SWORD = register("advanced_sword", new AdvancedSwordItem(GAMaterials.ADVANCED_TOOL, 3, -2.4F,settings()));
+    public static final Item ADVANCED_PICKAXE = register("advanced_pickaxe", new AdvancedPickaxeItem(GAMaterials.ADVANCED_TOOL, 1, -2.8F,settings()));
+    public static final Item ADVANCED_AXE = register("advanced_axe", new AdvancedAxeItem(GAMaterials.ADVANCED_TOOL, 5.0F, -3.0F,settings()));
+    public static final Item ADVANCED_SHOVEL = register("advanced_shovel", new AdvancedShovelItem(GAMaterials.ADVANCED_TOOL, 1.5F, -3.0F,settings()));
+    //public static final Item ADVANCED_HOE = register("advanced_hoe", new AdvancedHoeItem(GAMaterials.ADVANCED_TOOL, -3, 0.0F,settings()));
     public static final Item REINFORCED_HELMET = register("reinforced_helmet", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.HEAD, settings()));
     public static final Item REINFORCED_CHESTPLATE = register("reinforced_chestplate", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.CHEST, settings()));
     public static final Item REINFORCED_LEGGINGS = register("reinforced_leggings", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.LEGS, settings()));
     public static final Item REINFORCED_BOOTS = register("reinforced_boots", new ArmorItem(GAMaterials.REINFORCED_ARMOR, EquipmentSlot.FEET, settings()));
+    public static final Item ADVANCED_HELMET = register("advanced_helmet", new AdvancedArmorItem(GAMaterials.ADVANCED_ARMOR, EquipmentSlot.HEAD, settings()));
+    public static final Item ADVANCED_CHESTPLATE = register("advanced_chestplate", new AdvancedArmorItem(GAMaterials.ADVANCED_ARMOR, EquipmentSlot.CHEST, settings()));
+    public static final Item ADVANCED_LEGGINGS = register("advanced_leggings", new AdvancedArmorItem(GAMaterials.ADVANCED_ARMOR, EquipmentSlot.LEGS, settings()));
+    public static final Item ADVANCED_BOOTS = register("advanced_boots", new AdvancedArmorItem(GAMaterials.ADVANCED_ARMOR, EquipmentSlot.FEET, settings()));
     //machines
     public static final Block COAL_REFINER = register("coal_refiner", new CoalRefinerBlock(settings(Material.METAL, 3.5F, 15.0F).requiresTool().sounds(BlockSoundGroup.STONE).luminance(state -> state.get(CoalRefinerBlock.LIT) ? 13: 0)));
     public static final Block CRAFTING_MACHINE = register("crafting_machine", new CraftingMachineBlock(settings(Material.METAL, 3.0F, 15.0F).requiresTool().sounds(BlockSoundGroup.STONE)));

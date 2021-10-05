@@ -11,6 +11,83 @@ import net.minecraft.sound.SoundEvents;
 
 public class GAMaterials {
 
+    public static final ArmorMaterial ADVANCED_ARMOR = new ArmorMaterial() {
+
+        @Override
+        public int getDurability(EquipmentSlot slot) {
+            int[] durability = new int[]{13, 15, 16, 11};
+            return durability[slot.getEntitySlotId()] * 35;
+        }
+
+        @Override
+        public int getProtectionAmount(EquipmentSlot slot) {
+            final int [] protection = new int[] {4, 7, 10, 4};
+            return protection[slot.getEntitySlotId()];
+        }
+
+        @Override
+        public int getEnchantability() {
+            return 8;
+        }
+
+        @Override
+        public SoundEvent getEquipSound() {
+            return SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
+        }
+
+        @Override
+        public Ingredient getRepairIngredient() {
+            return Ingredient.EMPTY;
+        }
+
+        @Override
+        public String getName() {
+            return "advanced";
+        }
+
+        @Override
+        public float getToughness() {
+            return 2.0F;
+        }
+
+        @Override
+        public float getKnockbackResistance() {
+            return 0;
+        }
+    };
+
+    public static final ToolMaterial ADVANCED_TOOL = new ToolMaterial() {
+        @Override
+        public int getDurability() {
+            return 1000;
+        }
+
+        @Override
+        public float getMiningSpeedMultiplier() {
+            return 10.0F;
+        }
+
+        @Override
+        public float getAttackDamage() {
+            return 5.0F;
+        }
+
+        @Override
+        public int getMiningLevel() {
+            return 3;
+        }
+
+        @Override
+        public int getEnchantability() {
+            return 8;
+        }
+
+        @Override
+        public Ingredient getRepairIngredient() {
+            return Ingredient.EMPTY;
+        }
+    };
+
     public static final ArmorMaterial REINFORCED_ARMOR = new ArmorMaterial() {
         @Override
         public int getDurability(EquipmentSlot slot) {

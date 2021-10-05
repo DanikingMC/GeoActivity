@@ -1,4 +1,4 @@
-package geoactivity.mixin.rechargeable;
+package geoactivity.mixin.recharge;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableMultimap;
@@ -20,6 +20,7 @@ public abstract class ItemStackMixin{
 
     @Shadow
     public abstract Item getItem();
+
 
     @Inject(method = "getAttributeModifiers", at = @At("RETURN"), cancellable = true)
     private void getAttributeModifiers(EquipmentSlot equipmentSlot, CallbackInfoReturnable<Multimap<EntityAttribute, EntityAttributeModifier>> info) {

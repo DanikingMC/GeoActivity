@@ -16,7 +16,7 @@ public class CraftingExtendedSerializer implements RecipeSerializer<ShapedRecipe
 
     public ShapedRecipe read(Identifier id, JsonObject json) {
         Map<String, Ingredient> map = RecipeUtil.readJsonSymbols((JsonHelper.getObject(json, "key")));
-        final String[] strings = RecipeUtil.getCleanPattern(JsonHelper.getArray(json, "pattern"));
+        final String[] strings = RecipeUtil.getCleanedPattern(JsonHelper.getArray(json, "pattern"));
         int i = strings[0].length();
         int j = strings.length;
         return new ShapedRecipe(id, "", i, j, RecipeUtil.setPatternMatrix(strings, map, i, j), RecipeUtil.deserializeItemFromJson(JsonHelper.getObject(json, "result")));

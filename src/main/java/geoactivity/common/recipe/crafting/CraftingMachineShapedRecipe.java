@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 import java.util.Map;
 
-public record CraftingMachineShapedRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> input, ItemStack output) implements IMachineRecipe {
+public record CraftingMachineShapedRecipe(Identifier id, int width, int height, DefaultedList<Ingredient> input, ItemStack output) implements IMachineCrafting {
 
     @Override
     public ItemStack craft(CraftingInventory inventory) {
@@ -83,7 +83,7 @@ public record CraftingMachineShapedRecipe(Identifier id, int width, int height, 
 
         public CraftingMachineShapedRecipe read(Identifier id, JsonObject json) {
             Map<String, Ingredient> map = RecipeUtil.readJsonSymbols((JsonHelper.getObject(json, "key")));
-            final String[] strings = RecipeUtil.getCleanPattern(JsonHelper.getArray(json, "pattern"));
+            final String[] strings = RecipeUtil.getCleanedPattern(JsonHelper.getArray(json, "pattern"));
             int i = strings[0].length();
             int j = strings.length;
             return new CraftingMachineShapedRecipe(id, i, j, RecipeUtil.setPatternMatrix(strings, map, i, j), RecipeUtil.deserializeItemFromJson(JsonHelper.getObject(json, "result")));

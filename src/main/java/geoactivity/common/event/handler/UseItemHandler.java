@@ -22,18 +22,21 @@ public class UseItemHandler implements UseItemCallback {
     @Override
     public TypedActionResult<ItemStack> interact(PlayerEntity player, World world, Hand hand) {
         final ItemStack stack = player.getStackInHand(hand);
-        if (stack.getItem() instanceof Rechargeable item) {
-            if (!world.isClient) {
+        if (!world.isClient) {
+            if (stack.getItem() instanceof Rechargeable item) {
+
+                final GAInventory inventory = GAInventory.create(stack, item.size());
                 if (player.isSneaking()) {
                     player.openHandledScreen(new NamedScreenHandlerFactory() {
                         @Override
                         public Text getDisplayName() {
                             return new TranslatableText(stack.getTranslationKey());
                         }
+
                         @Nullable
                         @Override
                         public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-                            return item.getGui(syncId, inv, new GAInventory(stack, item.size()));
+                            return item.getGui(syncId, inv, inventory);
                         }
                     });
                 } else {
